@@ -1,3 +1,8 @@
+# 2024年秋季Java基础课用笔记
+
+## 基础知识准备
+
+
 **1、安装软件**
 
 **配置java开发环境**
@@ -61,13 +66,16 @@
    
     Write Once , Run any Where
 
-**常用命令**
+### Java开发基础知识准备
+
+- **常用命令**
   
-  **javac 编译命令**
+  - **javac 编译命令**
   
-      格式 javac [-d 目录路径] 文件名.java
-      作用 编译源码文件，获得字节码文件 可选：将字节码文件存放到-d后面指定的位置
-使用 
+      格式 `javac [-d 目录路径] 文件名.java\` 作用 编译源码文件，获得字节码文件\
+      可选：将字节码文件存放到`-d`后面指定的位置
+
+    - **使用** 
 
 
   ```js
@@ -76,35 +84,39 @@
       // 将编译后的.class存放到obj目录下
   ```
 
-  **java运行的命令**
+  ![字节码自动生成](./字节码自动生成.png)
 
-      格式 java [-cp .class文件目录路径] 类名
+  - **java运行的命令**
+
+      格式 java [-cp .class文件目录路径] 类名\
       作用 运行字节码文件 可选： 从指定路径查找到运行文件
-使用:
+    - **使用:**
 
-  ```js
-  java HelloWorld
-  java -cp obj/ HelloWorld
-  ```
-
+    ```js
+    java HelloWorld
+    java -cp obj/ HelloWorld
+    ```
+ ![运行指令图示](./编译及运行指令.png)
   - ***package*****包名**
   
       包名一般是公司域名反写
       Table类
       Table类
       定义格式：
-        package 包名;
+        `package` 包名;
         包名一般是公司域名反写
-要求：
 
-        package语句必须是程序的第一条可执行到代码
-        package语句在一个Java文件中最多有一条
-        package语句在一个Java文件中可以没有
+    - 要求：
 
-        这个包名的代码package com.briup;编译后，会在com目录下生成briup目录
-        briup目录下生成Table.class文件
-- 场景
-
+        > package语句必须是程序的第一条可执行到代码\
+        > package语句在一个Java文件中最多有一条\
+        >package语句在一个Java文件中可以没有
+        >这个包名的代码package com.briup;\
+        >编译后，会在com目录下生成briup目录briup目录下生成Table.class文件
+      
+![package的文件关系](./package的文件关系.png)
+  - 场景
+    ```js
       教务系统
         学生管理
             新增  修改  删除  查询
@@ -134,22 +146,21 @@
           com.brian.updata;
             UpdataStudent;
             UpdataTeacher;
-- **导包**
-    
-      import 包名.类名;
+          
+      ```
 
-      不需要导包就可以使用：
-      java.lang包下的类
+  - **导包**
+    
+      import 包名.类名;\
+      不需要导包就可以使用：`java.lang`包下的类\
 [Java官方API文本](https://tool.oschina.net/uploads/apidocs/jdk-zh/java/lang/package-summary.html)
 
-***JVM***
+- ***JVM***
 
     垃圾回收机制
       
-          
-
-
-**注意：**
+# 建议
+  - **注意：**
 
     1. 修改改环境变量
     2. 三个确定按钮都要点
@@ -163,7 +174,7 @@
       2. java HelloWorld 命令对不对 文件名对不对
       3. CLASSPATH 不要写错 可以不写 或者写 "."
 
-**练习打字**
+  - **练习打字**
 
     1. 键位 指法（金山打字通）
     2. 多打字（聊天、打一些熟悉的文章）
