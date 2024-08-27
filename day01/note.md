@@ -57,7 +57,7 @@
       源码要经过编译，生成与平台无关的字节码.class文件，不是可执行程序
       需要jvm去解释执行（java为不同的操作系统提供了不同的虚拟机）
       Java 
-** 2Java跨平台的原理**
+- **2Java跨平台的原理**
    
     Write Once , Run any Where
 
@@ -67,22 +67,86 @@
   
       格式 javac [-d 目录路径] 文件名.java
       作用 编译源码文件，获得字节码文件 可选：将字节码文件存放到-d后面指定的位置
-      使用 
+使用 
+
+
+  ```js
       javac HelloWorld.java // 不指定目录.class存放到当前文件
       javac -d obj/ HelloWorld.java
       // 将编译后的.class存放到obj目录下
+  ```
 
   **java运行的命令**
 
       格式 java [-cp .class文件目录路径] 类名
       作用 运行字节码文件 可选： 从指定路径查找到运行文件
-        使用 
-          java HelloWorld
-          java -cp obj/ HelloWorld
-  ***package*****包名**
+使用:
+
+  ```js
+  java HelloWorld
+  java -cp obj/ HelloWorld
+  ```
+
+  - ***package*****包名**
   
+      包名一般是公司域名反写
+      Table类
+      Table类
+      定义格式：
+        package 包名;
+        包名一般是公司域名反写
+要求：
 
+        package语句必须是程序的第一条可执行到代码
+        package语句在一个Java文件中最多有一条
+        package语句在一个Java文件中可以没有
 
+        这个包名的代码package com.briup;编译后，会在com目录下生成briup目录
+        briup目录下生成Table.class文件
+- 场景
+
+      教务系统
+        学生管理
+            新增  修改  删除  查询
+        教师管理
+            新增  修改  删除  查询
+      package 按角色去分模块;
+          com.brian.student;
+            AddStudent;
+            EdtStudent;
+            DeleteStudent;
+            UpdataStudent;
+          com.brian.teacher;
+            AddTeacher;
+            EdtTeacher;
+            DeleteTeacher;
+            UpdataTeacher;
+      package 按功能去分模块;
+          com.brian.add;
+            AddStudent;
+            AddTeacher;
+          com.brian.edit;
+            EdtStudent;
+            EdtTeacher;
+          com.brian.delete;
+            DeleteStudent;
+            DeleteTeacher;
+          com.brian.updata;
+            UpdataStudent;
+            UpdataTeacher;
+- **导包**
+    
+      import 包名.类名;
+
+      不需要导包就可以使用：
+      java.lang包下的类
+[Java官方API文本](https://tool.oschina.net/uploads/apidocs/jdk-zh/java/lang/package-summary.html)
+
+***JVM***
+
+    垃圾回收机制
+      
+          
 
 
 **注意：**
