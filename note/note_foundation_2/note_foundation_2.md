@@ -113,13 +113,107 @@
   int a;//先声明
   a = 10;//再初始化
   ```
+![图片](./声明和赋值在内存中的体现.jpg)
   - 注意：
     - Java变量一定要先声明 再赋值 再使用
     ```Java
     Syste.out.println(a);//报错  a?
     int a = 10;
     ```
+## 3. ***数据类型***
+- 数据类型
+  - 基本数据类型
+    - 整数类型\
+      ``` byte ```1字节 -8~7\
+      ``` short ```2字节 -16~15\
+      ``` int ```4字节 -32~31\
+      ``` long ```8字节 -64~63
+    - 浮点类型\
+      ``` float ```4字节 -32~31\
+      ``` double ```8字节 -64~63
+    - 字符类型\
+     ``` char ```2字节 -16~15
+    - 布尔类型\
+    ``` boolean ```1字节 -8~7
+  - 引用数据类型
+- 字节
+  - bit(比特位)：bit 二进制 0 1
+  - byte 8bit(字节)：是计算机分配内存的最小单位 通常用B表示
+  ``1B = 8bit``
 
+| 数据类型 | 中文名称 | 所占内存大小 |
+|----------|----------|--------------|
+| `byte`   | 字节     | 1字节        |
+| `short`  | 短整型   | 2字节        |
+| `int`    | 整型     | 4字节        |
+| `long`   | 长整型   | 8字节        |
+| `float`  | 浮点型   | 4字节        |
+| `double` | 双精度浮点型 | 8字节        |
+| `char`   | 字符     | 2字节        |
+| `boolean`| 布尔     | 通常认为是1字节（实际实现可能不同） |
+
+```java
+    public class Java_Datatype_1{
+
+    public static void main(String[] args) {
+        String name = "zhangsan";
+        // TODO 基本數據类型
+
+        // TODO 1.整数类型
+        //  byte : 8位
+        //  short : 16位
+        //  int : 32位
+        //  long : 64位
+        Long l = 100000000l;// 结尾+字母l或L都可以，不加也可以，一般用大写，小写容易和数字1混淆
+
+        //TODO 2.浮点类型:含有小数点的数据类型
+        // 根据计算精度分为
+        // 默认情况下 : 小数点的数据会被识别为精度较高的双精度double类型
+        // floot : 单精度浮点类型，数据需要使用F或f结尾
+        float f = 1.0f;// 结尾字母f或F都可以，不可以不加
+        // double : 双精度浮点类型
+        double d = 2.0d;//结尾+字母d或D都可以，不加也可以
+
+        //TODO 3.字符类型
+        // 所谓字符类型 : 其实就是用符号来表示文字类型
+        char c = '@';
+
+        //TODO 4.布尔类型‘
+        // true,false,标识判断条件是否成立，如果成立，取值true，反之，那么取值false
+        boolean bln = true;
+    }
+}
+```
+- 转义字符
+  ```java
+  \
+  \n 换行 
+  \t 制表符
+  \\ 反斜杠
+  \' 单引号
+  \" 双引号
+  ```
+
+### 随课代码
+
+```Java    
+    public class Test {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//输出Hello World!
+		System.out.println("Hello World!");
+		//声明一个int 类型变量a
+		int a ;
+		//初始化变量a
+		a = 10;
+		a = 15;
+		// 输出a的值到控制台
+		System.out.println("a = " + a);
+		int b = 10;
+		System.out.println("b = " + b);
+	}
+}
+```    
 
 
 # 总结学习过程中遇到的所有报错
