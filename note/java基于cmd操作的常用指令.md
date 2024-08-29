@@ -22,9 +22,9 @@
 | `set PATH=%JAVA_HOME%\bin;%PATH%` | 将JDK的`bin`目录添加到系统路径中       |
 | `cls`      | 清除屏幕内容                                                 |
 | `exit`     | 退出命令提示符                                               |
-| `javac -d  ../../odj  [所编译的java文件名].java` |               |
-|` java -cp ../../obj/ [类名包括完整包名]`     |                    |
-|` javac -encoding [编译前java文件编码格式] [所编译的java文件名].java`  |                   |
+| `javac -d  ../../odj  [所编译的java文件名].java` |  编译java文件，并生成class文件到上两级路径中obj文件夹中             |
+|` java -cp ../../obj/ [类名包括完整包名]`     |运行指定文件夹中字节码                    |
+|` javac -encoding [编译前java文件编码格式] [所编译的java文件名].java`  |以UTF_8编码格式编译java文件                   |
 
 **说明：**
 - `javac HelloWorld.java`：将`HelloWorld.java`编译成`HelloWorld.class`。
