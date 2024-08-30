@@ -236,21 +236,26 @@
   ```
       20
   - 二进制   ： 
+  ```
   1. 20 ÷ 2 = 10 ... 0
   2. 10 ÷ 2 = 5  ... 0
   3.  5 ÷ 2 = 2  ... 1
   4.  2 ÷ 2 = 1  ... 0
   5.  1 ÷ 2 = 0  ... 1
   结束 0b10100
+  ```
   - 八进制   ：
+  ```
   1. 20 ÷ 8 = 2 ... 4
   2.  2 ÷ 8 = 0 ... 2
   3. 结束 024
+  ```
   - 十六进制 ：
+  ```
   1. 20 ÷ 16 = 1 ... 4
   2.  1 ÷ 16 = 0 ... 1
   3. 结束 0x14
-
+  ```
   - 0x99 转为十进制\
     9 × 16 1次方 144\
     9 × 16 0次方 9\
@@ -263,34 +268,74 @@
     大类型赋值给小类型可能会丢失精度 所以编译不通过\
     byte\short\char类型在做算术运算时，系统会自动进行类型转换，然后做运算
 
-  - 显式类型转换\
+  - 显式类型转换
     - 定义\
       赋值过程中如果大类型的值赋值给小类型变量，编译报错，可以使用强制类型转换
-    - 格式\
-      float float1 = (float)3.14;\
+    - 格式
+  ```
+      float float1 = (float)3.14;
       float float2 = (float)((byte1 - 5) * short1 + double1);
+  ```
+    - 强制类型转换的时候 注意值的一个问题
 
         
 
 ### 随课代码
 
 ```Java    
-    public class Test {
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//输出Hello World!
-		System.out.println("Hello World!");
-		//声明一个int 类型变量a
-		int a ;
-		//初始化变量a
-		a = 10;
-		a = 15;
-		// 输出a的值到控制台
-		System.out.println("a = " + a);
-		int b = 10;
-		System.out.println("b = " + b);
-	}
-}
+/*
+ * @Description: Test类
+ * @Author: FallCicada
+ * @Date: 2024-08-29 08:55:07
+ * @LastEditors: rendc
+ * @LastEditTime: 2024-08-29 19:41:06
+ */
+public class Test{
+    public static void main(String[] args){
+      System.out.println("Test-Hello");
+      // 进制
+      byte b1 = 0b01100001;
+      byte b2 = 0141;
+      byte b3 = 97;
+      byte b4 = 0x61;
+      System.out.println("b1: " + b1);
+      System.out.println("b2: " + b2);
+      System.out.println("b3: " + b3);
+      System.out.println("b4: " + b4);
+      // 数据类型转换
+      // int类型值 赋值给 long类型
+      long num = 10;
+      System.out.println("num: " + num);
+  
+      // 小类型赋值给大类型
+      double price = 8.0F;
+      System.out.println("price: " + price);
+  
+      // 大类型赋值给小类型 - 报错
+      // int length = 10.5;
+      // System.out.println("length: " + length);
+      // byte\short\char类型在做算术运算时
+      // 会自动提升为int类型 然后再参与计算
+      byte b = 10;
+      short s = 5;
+      // short sum = b + s;
+      // 从int转换到short可能会有损失
+      // System.out.println("sum: " + sum);
+      int sum = b + s;
+      System.out.println("sum: " + sum);
+      // 
+      byte byte1 = 10;
+      short short1 = 5;
+      double double1 = 1.0;
+      double t = (byte1 - 5) * short1 + double1;
+      System.out.println("t: " + t);
+      // 强制类型转换（显式类型转换）
+      float float1 = (float)3.14;
+      float float2 = (float)((byte1 - 5) * short1 + double1);
+      System.out.println("float1: " + float1);
+      System.out.println("float2: " + float2);
+    }
+  }
 ```    
 
 
