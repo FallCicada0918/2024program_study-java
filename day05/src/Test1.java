@@ -34,6 +34,5 @@ public class Test1 {
         int b = scanner.nextInt();
         String s1 = (a > b) ? "a = " + a : "b = " + b;
         System.out.println("较大值是" + s1);
-
     }
 }
