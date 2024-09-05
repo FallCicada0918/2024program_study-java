@@ -191,5 +191,49 @@
       - 数组遍历array.length是一个属性 不是方法
       - 必须在创立数组对象时就明确指定
       - 一旦确定，无法改变
-      - >=0 不可小于0
+      - 大于等于0 不可小于0
       - 数组下标从0开始 数组的下标最大值
+    - 数组的拷贝
+      - 数组拷贝
+        - 数组的长度不能更改，但如果有更多的元素存入数组，可以创建一个更大的数组，将源数组的元素复制到新数组中，然后放入新数组
+          ```java
+            java.util.Arrays.copyOf(arr,arr.length);
+            java.long.System.arraycopy(arr[数组],0[从哪里开始复制],arr2[数组],0[复制到哪里],arr.length[数组长度]);
+            // 有旧数组[0,1,2,3]
+            // 新数组[0,0,0,0,0,0,0,0,0,0]
+            // 复制数组
+            //arraycopy(oldArray,oldIndex,newArray,newIndex,length)
+            //oldArray：源数组
+            //oldIndex：源数组的开始索引
+            //newArray：目标数组
+            //newIndex：目标数组的开始索引
+            //newLength：复制的长度
+          ``` 
+      - 数组元素的复制
+      - 数组元素的交换
+      - 数组的排序
+      - 数组的反转
+      - 数组的查找
+      - 数组的遍历
+  - 二维数组
+
+
+    ```java
+        public static void main(String[] args) {
+            System.out.println("Hello Array");
+            int[][] array = new int[2][3];
+            // 2表示一维长度，表示这个二维数组包含两个一维数组
+            // 3表示二维长度，表示这个二维数组包含的一维数组长度为3
+            System.out.println("array[0] = " + array[0]);
+            // [I@24d46ca6
+            System.out.println("array[1] = " + array[1]);
+            // [I@3a71f4dd
+            //  System.out.println("array[2] = " + array[2]);//下标越界
+            System.out.println("array = " + array);  
+            //[[I@7adf9f5f
+            // [ 个数表示数组维度
+            // I 表示int类型
+            // @ 后面的是hashcode     
+        }
+    ```
+![内存图](./二维数组内存图.png)
