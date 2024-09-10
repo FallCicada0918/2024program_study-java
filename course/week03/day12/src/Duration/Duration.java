@@ -3,9 +3,9 @@
  * @Author: FallCicada
  * @Date: 2024-09-10 11:27:25
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-10 11:44:36
+ * @LastEditTime: 2024-09-10 15:00:12
  */
-package Duration;
+
 public class Duration {
     int hour;
     int min; 
@@ -48,6 +48,7 @@ public class Duration {
 
     public void disp() {
         int second = hour*3600 + min*60 + sec;
+        System.out.println(hour + "小时;" + min + "分钟;" + sec + "秒");
         System.out.println("总秒数:" + second);
     }
 
