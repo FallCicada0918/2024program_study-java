@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-06 08:38:30
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-09 19:37:34
+ * @LastEditTime: 2024-09-10 08:41:40
 -->
 # 2024年秋季 - Java基础课用笔记
 # 面向过程
@@ -60,7 +60,8 @@
 
 ### 封装
   - 是面向对象语言的三大特征，另外两个是继承和多态
-  - 封装 隐藏对象的属性和实现的细节 仅对外提供公共的访问方式
+  - 封装 
+    - 隐藏对象的属性和实现的细节 仅对外提供公共的访问方式
     - 提高安全性
     - 用户不需要知道内部具体复杂的实现。只需要使用对应的功能即可
   - 封装的原则
@@ -74,7 +75,7 @@
     ```
   - 封装的实现
     1. 用 private 修饰成员属性（成员变量）
-    2. 提供对应的公开的 public set和 public get方法
+    2. 提供对应的公开的 public set和public get方法
 
 - this关键字
   - this关键字可以用来区分局部变量和成员变量
@@ -124,7 +125,7 @@
     * @LastEditTime: 2024-09-09 18:12:19
     */
 
-    
+
     public class Account {
         private String id;//卡号
         private double balance;//余额
@@ -146,7 +147,7 @@
             this.userName = userName;
         }
 
-        public void setUserName() {
+        public void setUserName(String userName) {
             this.userName = userName;
         }
 

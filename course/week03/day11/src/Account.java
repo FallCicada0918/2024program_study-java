@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-09 16:29:39
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-09 18:12:19
+ * @LastEditTime: 2024-09-10 08:37:13
  */
 public class Account {
     private String id;//卡号
@@ -26,7 +26,7 @@ public class Account {
         this.userName = userName;
     }
 
-    public void setUserName() {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
