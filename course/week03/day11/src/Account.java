@@ -3,12 +3,13 @@
  * @Author: FallCicada
  * @Date: 2024-09-09 16:29:39
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-10 08:37:13
+ * @LastEditTime: 2024-09-10 09:02:02
  */
 public class Account {
     private String id;//卡号
     private double balance;//余额
-    private String userName;
+    private String userName;//用户名
+    private String type;//用户类型
 
     // 构造方法 - 无参 - 无参构造器
     public Account(){
