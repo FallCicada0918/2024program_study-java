@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-11 18:30:01
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-11 18:30:05
+ * @LastEditTime: 2024-09-13 08:36:57
  */
 /*
  * @Description: 
@@ -16,7 +16,7 @@ public class School{
     //属性
     private String name;//学校的名字
     private int number;//学生数量
-    public static String library;//图书馆名字
+    public static String library = "栋梁图书馆";//图书馆名字
     //成员方法
     //get,set
     //构造器
@@ -27,7 +27,6 @@ public class School{
     public School(String name,int number,String libaray){
         this.name = name;
         this.number = number;
-        this.library = library;
     }
     //show方法输出
     public void show(){
