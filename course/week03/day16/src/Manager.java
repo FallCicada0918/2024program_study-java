@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-14 09:23:35
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-14 09:29:58
+ * @LastEditTime: 2024-09-14 14:56:26
  */
 //经理类继承员工类
 public class Manager extends Employee {
@@ -20,8 +20,14 @@ public class Manager extends Employee {
         this.bonus = bonus;
     }
     //重写父类doWork方法
+    @Override
     public void doWork(){
         System.out.println("经理在工作");
+    }
+
+    //重写toString方法
+    public String toString(){
+        return "经理在工作";
     }
      
 }

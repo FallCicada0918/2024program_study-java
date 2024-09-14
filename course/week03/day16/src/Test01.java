@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-14 09:30:06
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-14 09:40:22
+ * @LastEditTime: 2024-09-14 14:50:42
  */
 public class Test01{
     public static void main(String[] args) {
@@ -11,5 +11,6 @@ public class Test01{
         emp.doWork();
         Manager mgr = new Manager("FallCicada", "001",1000);
         mgr.doWork();
+        System.out.println("manager" + mgr);
     }
 }
