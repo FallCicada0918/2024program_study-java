@@ -12,6 +12,9 @@ public class Person {
         this.name = name;
     }
 
+    public String getName(){
+        return name;
+    }
     public void sayHello(){
         System.out.println("hello,my name is "+name);
     }
