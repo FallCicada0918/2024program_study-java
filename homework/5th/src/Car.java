@@ -10,7 +10,6 @@ class Car{
     String color;
     String brand;
     String price;
-
     public void moveForward(){
         System.out.println("前进");
     }
