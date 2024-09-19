@@ -3,105 +3,82 @@
  * @Author: FallCicada
  * @Date: 2024-09-18 17:43:44
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-18 19:12:41
+ * @LastEditTime: 2024-09-19 16:38:32
  */
-// 定义圆类 Circle
 class Circle {
-    private double radius; // 圆的半径属性
-    // 构造方法，初始化圆的半径
+    // 属性
+    public double radius;
+
+    // 构造器
     public Circle(double radius) {
         this.radius = radius;
     }
-    // 获取半径
-    public double getRadius() {
-        return radius;
-    }
-    // 设置半径
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
-    // 计算圆的面积
+
+    // 计算面积
     public double getArea() {
         return Math.PI * radius * radius;
     }
-    // 计算圆的周长
+
+    // 计算周长
     public double getCircumference() {
         return 2 * Math.PI * radius;
     }
 
-    // 重写 toString 方法，返回圆的信息
+    // 重写toString方法
     @Override
     public String toString() {
-        return "Circle [radius=" + radius + "]";
+        return "圆形 [半径=" + radius + "]";
     }
 }
 
-// 定义圆柱类 Cylinder，继承自 Circle 类
+// 圆柱类，继承自Circle
 class Cylinder extends Circle {
-    private double height; // 圆柱的高度属性
+    // 新增属性
+    private double height;
 
-    // 构造方法，初始化圆柱的半径和高度
+    // 构造器
     public Cylinder(double radius, double height) {
-        super(radius); // 调用父类构造器来初始化半径
+        super(radius); // 调用父类构造器
         this.height = height;
     }
 
-    // 获取高度
-    public double getHeight() {
-        return height;
-    }
-
-    // 设置高度
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    // 重写 getArea 方法，计算圆柱的表面积
+    // 重写父类的getArea方法以计算圆柱的表面积
     @Override
     public double getArea() {
-        // 圆柱的侧面积加上两个底面的面积
-        return 2 * Math.PI * getRadius() * height + 2 * ((Circle) this).getArea();
+        double baseArea = super.getArea();
+        double sideArea = getCircumference() * height;
+        return 2 * baseArea + sideArea; // 两个底面加上侧面
     }
 
-    // 新增计算圆柱体积的方法
+    // 新增方法：计算体积
     public double getVolume() {
-        // 圆柱的体积
-        return ((Circle) this).getArea() * height;
+        return super.getArea() * height;
     }
 
-    // 重写 toString 方法，返回圆柱的信息
+    // 重写toString方法
     @Override
     public String toString() {
-        return "Cylinder [radius=" + getRadius() + ", height=" + height + "]";
+        return "圆柱体信息 [底面半径=" + super.radius + ", 高=" + height + "]";
     }
 }
 
+// 测试代码
 public class Test14 {
     public static void main(String[] args) {
-        // 创建一个 Cylinder 类的对象，并使用 Circle 类型的引用指向它
-        Circle c = new Cylinder(5, 10);
+        // 创建Cylinder对象，但是使用Circle类型的引用
+        Circle circleRef = new Cylinder(5, 10);
 
-        // 检查引用 c 是否是指向一个 Cylinder 对象
-        if (c instanceof Cylinder) {
-            // 强制类型转换，从 Circle 类型转换成 Cylinder 类型
-            Cylinder cylinder = (Cylinder) c;
-            // 输出圆柱的体积
-            System.out.println("Volume is: " + cylinder.getVolume());
-        } else {
-            System.out.println("This is not a Cylinder.");
+        // 可以调用父类方法
+        System.out.println("圆柱体面积: " + circleRef.getArea());
+        System.out.println(circleRef.toString());
+
+        // 尝试调用子类特有的方法会失败，因为circleRef是Circle类型
+        // System.out.println("Volume: " + circleRef.getVolume()); // 这行会出错
+
+        // 需要向下转型为Cylinder才能调用getVolume
+        if (circleRef instanceof Cylinder) {
+            Cylinder cylinder = (Cylinder) circleRef;
+            System.out.println("圆柱体体积: " + cylinder.getVolume());
         }
-
-        // 测试 Circle 类
-        Circle circle = new Circle(5);
-        System.out.println(circle.toString()); // 输出 Circle 对象的信息
-        System.out.println("Circumference is: " + circle.getCircumference()); // 输出圆的周长
-        System.out.println("Area is: " + circle.getArea()); // 输出圆的面积
-
-        // 测试 Cylinder 类
-        Cylinder cylinder = new Cylinder(5, 10);
-        System.out.println(cylinder.toString()); // 输出 Cylinder 对象的信息
-        System.out.println("Cylinder Circumference is: " + cylinder.getCircumference()); // 输出圆柱的周长
-        System.out.println("Cylinder Area is: " + cylinder.getArea()); // 输出圆柱的表面积
-        System.out.println("Volume is: " + cylinder.getVolume()); // 输出圆柱的体积
     }
 }
