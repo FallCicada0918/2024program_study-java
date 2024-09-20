@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-19 16:58:29
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-19 17:02:37
+ * @LastEditTime: 2024-09-20 08:47:40
  */
 class Animal {
     public void eat() {
@@ -21,7 +21,7 @@ class Dog extends Animal{
 
     @Override
     public void sleep(){
-        System.out.println("趴着睡");
+        System.out.println("狗睡觉");
     }
 }
 class Cat extends Animal{
@@ -32,10 +32,10 @@ class Cat extends Animal{
 
     @Override
     public void sleep(){
-        System.out.println("躺着睡");
+        System.out.println("猫睡觉");
     }
 }
-public class Test01 {
+public class Test01Animal {
     public static void main(String[] args) {
         Animal a = new Animal();
         a.eat();
