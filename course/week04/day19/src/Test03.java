@@ -12,7 +12,7 @@ public class Test03{
         System.out.println(IAction.NUM);
         //接口中的成员变量默认是常量
         //创建一个接口的引用指向接口的实现类
-        IAction iAction = new ActiomImpl(); 
+        IAction iAction = new ActionImpl(); 
         iAction.start();
     }
 }

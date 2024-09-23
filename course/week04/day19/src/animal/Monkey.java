@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-20 11:03:53
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-20 11:11:08
+ * @LastEditTime: 2024-09-20 14:46:26
  */
 package animal;
 
@@ -21,7 +21,7 @@ public class Monkey extends Animal2 implements ICycleAble, IJumpAble{
     }
     @Override
     public void sleep() {
-        System.out.println("猴子" + name + " 喜歡咬觀衆");
+        System.out.println("猴子" + name + " 喜歡睡覺");
     }
     // 重写从接口获取的抽象方法
     @Override
@@ -31,5 +31,8 @@ public class Monkey extends Animal2 implements ICycleAble, IJumpAble{
     @Override
     public void jump() {
         System.out.println(name + " 能夠跳火圈 ");
+    }
+    public void speak(String word){
+        System.out.println(name + " 說:“" + word+ "”");
     }
 }

@@ -5,7 +5,7 @@
  * @LastEditors: FallCicada
  * @LastEditTime: 2024-09-20 10:49:37
  */
-public class ActiomImpl implements IAction {
+public class ActionImpl implements IAction {
     //重写接口的全部抽象方法
     @Override
     public void start() {
