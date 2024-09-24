@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-19 16:51:19
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-23 19:11:14
+ * @LastEditTime: 2024-09-24 16:49:23
 -->
 
 # 2024年秋季 - Java基础课用笔记
@@ -753,7 +753,6 @@ public class Test033_Local {
 
   - 利用父类进行声明
 
-
 #### 核心任务
 
 匿名内部类的核心任务是重写抽象方法，然后 就可以调用重写方法
@@ -1187,3 +1186,43 @@ public class Test072_Define01 {
 ### 总结
 
 枚举是一种特殊的数据类型，用来表示一组固定的常量集合。枚举类可以定义方法、构造器和成员变量，并且可以实现接口。枚举元素默认是 `public static final`的，并且枚举类会隐式地继承 `java.lang.Enum`类。使用枚举可以提高代码的可读性和安全性。
+
+# 包装类 - 包装器类型
+
+## 基本类型对应的包装类型
+
+`int` 的包装类为 `Integer`
+`byte` 的包装类为 `Byte`
+`short` 的包装类为 `Short`
+`long` 的包装类为 `Long`
+`float` 的包装类为 `Float`
+`double` 的包装类为 `Double`
+`char` 的包装类为 `Character`
+`boolean` 的包装类为 `Boolean`
+
+```java
+
+  int a = 0;
+  把数字a转换为String类型
+  a.toString();
+
+```
+#### 自动装箱
+
+基本数据类型的值自动转换为
+
+#### 自动拆箱
+
+包装类型对象自动转化为基本数据类型的值
+
+# Object类
+
+- 是所有类的父类
+- `toString() `
+- 返回值：`String`类型的 类名 + @ + 地址值
+- 但是子类一般会重写这个方法，要注意重写的规则
+- `equals() `
+  - 判断两个对象是否相等
+- `getClass`
+  - 是final修饰的 不能被继承、不能被重写
+# String

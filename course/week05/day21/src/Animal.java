@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-24 09:18:22
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-24 09:19:44
+ * @LastEditTime: 2024-09-24 14:37:52
  */
 public abstract class Animal{
     private String name;
@@ -18,5 +18,4 @@ public abstract class Animal{
     }
     public abstract void eat();
     public abstract void sleep();
-    
 }
