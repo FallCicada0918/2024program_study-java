@@ -5,9 +5,9 @@
  * 
  * @Date: 2024-09-23 15:27:45
  * 
- * @LastEditors: rendc
+ * @LastEditors: FallCicada
  * 
- * @LastEditTime: 2024-09-23 16:26:37
+ * @LastEditTime: 2024-09-23 19:37:19
  */
 /**
  * Test02
@@ -24,6 +24,6 @@ public class Test02 {
     // // 创建一个内部类的对象
     // Outer.Inner inn2 = new Outer().new Inner();
     // inn2.show();
-    out.disp();
+    // out.disp();
   }
 }
