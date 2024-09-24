@@ -3,19 +3,25 @@
  * @Author: FallCicada
  * @Date: 2024-09-21 18:16:13
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-24 17:23:26
+ * @LastEditTime: 2024-09-24 17:42:30
  */
-class Outer {
-    // 使用内部类实现 show 方法
-    public static class Inner {
-        public void show() {
-            System.out.println("HelloWorld");
-        }
-    }
+interface Inner {
+    void show();
 
-    // 返回内部类的实例
+
+
+    
+}
+
+class Outer {
+    // 使用匿名内部类返回一个实现了 Inner 接口的实例
     public static Inner method() {
-        return new Inner();
+        return new Inner() {
+            @Override
+            public void show() {
+                System.out.println("HelloWorld");
+            }
+        };
     }
 }
 
