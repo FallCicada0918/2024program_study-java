@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-19 16:51:19
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-24 16:49:23
+ * @LastEditTime: 2024-09-25 16:31:38
 -->
 
 # 2024年秋季 - Java基础课用笔记
@@ -1207,6 +1207,7 @@ public class Test072_Define01 {
   a.toString();
 
 ```
+
 #### 自动装箱
 
 基本数据类型的值自动转换为
@@ -1225,4 +1226,182 @@ public class Test072_Define01 {
   - 判断两个对象是否相等
 - `getClass`
   - 是final修饰的 不能被继承、不能被重写
+
 # String
+
+- ***介绍***
+
+  - 在Java中 `String`是一个类类型 表示字符串
+  - 主要用用于处理类类型
+  - 在 `long`包下,所以在使用时不需要导包
+  - 
+  - Java 程序中所有字符串字面值（如"abc"）都是 String类对象
+    字符串值不可变，
+  - String 对象是不可变的，一旦创建，它们的值就不能被
+    修改
+- 常用构造方法
+
+  | 方法名                             | 说明                                           |
+  | ---------------------------------- | ---------------------------------------------- |
+  | `public String()`                | 创建空白字符串对象，不含有任何内容             |
+  | `public String(char[] chs)`      | 根据传入的字符串内容，来创建字符串对象         |
+  | `public String(String original)` | 根据传入的字符串内容，来创建字符串对象         |
+  | `String s = "abc"；`             | 直接赋值的方法创建字符串对象，内容就是 `abc` |
+- 案例展示
+
+  ```java
+       public class Test061_Basic {
+          public static void main(String[] args) {
+          // public String() : 创建一个空白字符串对象，不含有任何内容
+              String s1 = new String();
+              System.out.println(s1);
+              // public String(char[] chs) : 根据字符数组的内容，来创建字符串对象
+              char[] chs = {'a','b','c'};
+              String s2 = new String(chs);
+              System.out.println(s2);
+              // public String(String original) : 根据传入的字符串内容，来创建字符串对象
+              String s3 = new String("123");
+              System.out.println(s3);
+              String s4 = "hello";
+              System.out.println(s4);
+          }
+       }
+
+  ```
+- 注意，字符串对象创建以后，堆空间中字符串值不可以被修改，具体如下图：
+  ![String内存图](./String内存图.png)
+
+###### 常用方法
+
+* 无参构造器
+  ` public String();`
+* 一参构造器
+
+```java
+      public String(Char[] chs){
+        // 省略
+      }
+      public String(String s){
+        // 省略
+      }
+```
+
+* `length()`
+  作用：返回字符串的长度
+  参数：没有参数
+  返回值：`int`
+* `isEmpty()`
+  作用：
+  参数：
+  返回值：
+* `charAt(int var1)`
+  作用：返回指定索引位置的字符
+  参数：`int` 索引
+  返回值：字符
+* `equals(Object var1)`
+  作用：比较字符串内容是否相同
+  参数：（字符串）对象
+  返回值：`boolean`
+
+- `toCharArray()`
+  作用：将字符串转化为字符数组输出
+  参数：无参
+  返回值：`char[]`
+
+* `split`
+
+```java
+        public String[] split(String var1, int var2)
+        public String[] split(String var1)
+```
+
+    作用：根据传入的规则切割字符串
+        参数：
+          1. 必传的：规则，（转义字符）
+          2. 非必传的：用于限制返回数组的长度
+          如果是1那么返回的数组长度最大是1
+        返回值：`String[]`
+
+    作用：
+      参数：
+      返回值：
+
+* `substring`
+
+  ```java
+  public String substring(int var1)
+  public String substring(int var1, int var2)
+  ```
+
+  作用：根据开始位置和结束位置截取字符串
+  参数：开始位置和结束位置，结束位置是可选的 [开始位置,结束位置)
+  默认结束位置是str.length()数组长度
+  返回值：截取的字符串
+* `replace`
+
+  ```java
+  public String replace(char var1, char var2)
+  public String replace(CharSequence var1, CharSequence var2)
+  ```
+
+  `CharSequence`是一个接口，String类实现了这个接口
+  作用： 用新值 替换旧值 返回替换后的结果
+  参数：可以传单个字符，也可以传`string`
+  返回值：
+
+## 常量池
+
+##### ***问题引入***：
+
+    创建字符串对象，和其他普通对象一样，会占用计算机的资源（时间和空间），作为最常用的数据类型，大量频繁的创建字符串对象，会极大程度地影响程序的性能。
+
+##### **JVM为了提高性能和减少内存开销，在实例化字符串常量的时候进行了一些优化**
+
+- 为字符串开辟一个字符串常量池，类似于缓存区
+- 创建字符串常量时，首先会检查字符串常量池中是否存在该字符串，如果存在该字符串，则返回该实例的引用，如果不存在，则实例化创建该字符串，并放入池中
+
+##### String常量池
+
+   在Java中，String常量池是一块特殊的内存区域，用于存储字符串常量。String常量池的设计目的是为了节省内存和提高性能。
+   当我们创建字符串常量时，如果字符串常量池中已经存在相同内容的字符串，那么新创建的字符串常量会直接引用已存在的字符串对象，而不会创建新的对象。这样可以避免重复创建相同内容的字符串，省内存空间。
+   在JDK8及之后的版本中，**字符串常量池的位置与其他对象的存储位置，都位于堆内存中。**这样做的好处是，字符串常量池的大小可以根据需要进行调整，并且可以享受到垃圾回收器对堆内存的优化。
+
+##### Java将字符串放入String常量池的方式：
+
+1. **直接赋值**：通过直接赋值方式创建的字符串常量会被放入常量池中。
+   例如：`String str = "Hello"`;
+2. **调用String类提供intern()方法**：可以将字符串对象放入常量池中，并返回常量池中的引用。
+   例如：`String str = new String("World").intern();`
+   注意：通过new关键字创建的字符串对象不会放入常量池中，而是在堆内存中创建一个新的对象。只有通过直接赋值或调用intern()方法才能将字符串放入常量池中。
+
+###### 案例
+
+```java
+     public class Test062_String {
+        public static void main(String[] args) {
+            String s1 = "Hello";  // 创建一个字符串字面量 "Hello"，这个字符串直接存储在字符串常量池中。
+            String s2 = "Hello";  // 再次创建相同的字符串字面量 "Hello"，由于它已经存在于常量池中，因此s2直接引用已存在的那个。
+            System.out.println(s1 == s2);  // 比较s1和s2是否指向同一个对象（即是否为同一个引用）。输出true，因为它们都指向常量池中的同一个"Hello"。
+
+            // 使用new关键字创建一个新的String对象，其内容为"World"。这个对象存在于堆内存中，并且不会自动放入字符串常量池。
+            String s3 = new String("World");
+
+            // 创建另一个新的String对象，内容也是"World"，然后调用intern()方法。此方法会检查字符串常量池中是否存在相同内容的字符串，
+            // 如果不存在，则将当前对象的内容放入常量池，并返回常量池中的引用；如果存在，则直接返回常量池中的引用。
+            String s4 = new java.lang.String("World").intern();
+
+            // 创建一个字符串字面量 "World"，这个字符串直接存储在字符串常量池中。
+            String s5 = "World";
+
+            // 比较s3和s4是否指向同一个对象。输出false，因为s3指向的是堆内存中的对象，而s4指向的是常量池中的对象。
+            System.out.println(s3 == s4);
+
+            // 比较s4和s5是否指向同一个对象。输出true，因为intern()方法返回了常量池中的引用，而s5直接引用了常量池中的"World"。
+            System.out.println(s4 == s5);
+        }
+    }
+```
+
+###### 对应内存图
+
+![](./String内存图02.png)
