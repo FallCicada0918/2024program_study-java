@@ -1,12 +1,8 @@
 /*
  * @Description:Test05LinkedList.java
- * 
- * @Author: rendc
- * 
+ * @Author: FallCicada
  * @Date: 2024-09-27 10:48:08
- * 
- * @LastEditors: rendc
- * 
+ * @LastEditors: FallCicada
  * @LastEditTime: 2024-09-27 11:17:56
  */
 

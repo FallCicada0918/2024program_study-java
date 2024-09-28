@@ -1,12 +1,8 @@
 /*
  * @Description: Vector
- * 
- * @Author: rendc
- * 
+ * @Author: FallCicada
  * @Date: 2024-09-27 14:39:37
- * 
- * @LastEditors: rendc
- * 
+ * @LastEditors: FallCicada
  * @LastEditTime: 2024-09-27 14:43:52
  */
 
