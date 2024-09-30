@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-26 08:35:31
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-29 15:41:19
+ * @LastEditTime: 2024-09-30 10:23:15
 -->
 
 # 2024年秋季Java基础课用笔记
@@ -740,17 +740,20 @@ TreeSet是一个有序集合，存储数据时，一定要指定元素的排序�
         public int compareTo(T o);
     } 
 ```
+
 **compareTo方法说明：**
 `int result = this.属性.compareTo(o.属性);`
+
 * result的值大于0，说明this比o大
 * Bresult的值小于0，说明this比o小
 * result的值等于0，说明this和o相等
 
 **元素插入过程：**
-当向TreeSet插入元素时，TreeSet会使用元素的`compareTo()`方法来比较元素之间的大小关系。根据比较结果，TreeSet会将元素插入到合适的位置，以保持有序性。如果两个元素相等（`compareTo()`方法返回0），TreeSet会认为这是重复的元素，只会保留一个。
+当向TreeSet插入元素时，TreeSet会使用元素的 `compareTo()`方法来比较元素之间的大小关系。根据比较结果，TreeSet会将元素插入到合适的位置，以保持有序性。如果两个元素相等（`compareTo()`方法返回0），TreeSet会认为这是重复的元素，只会保留一个。
 **案例展示：**
 使用自然排序（**先按name升序，name相同则按age降序**）解决上述案例问题。
 基础Person类：
+
 ```java
     //定义Person类，实现自然排序
     public class Person implements Comparable<Person> {
@@ -789,7 +792,9 @@ TreeSet是一个有序集合，存储数据时，一定要指定元素的排序�
         }
     }   
 ```
+
 **测试类：**
+
 ```java
     import java.util.Set;
     import java.util.TreeSet;
@@ -820,10 +825,8 @@ TreeSet是一个有序集合，存储数据时，一定要指定元素的排序�
     Person [name=zs, age=21]
 ```
 
-
-
-
 排序规则(默认规则)：
+
 1. 自然排序(默认排序)
    元素的类要实现这个接口 `java.long.Comparable`
    重写 `compareTo()`方法
@@ -854,3 +857,130 @@ TreeSet是一个有序集合，存储数据时，一定要指定元素的排序�
 | **LinkedHashSet** | 基于哈希表和链表实现，按插入顺序排序，不允许重复元素 | `Set set = newLinked<>();`   |
 
 ## map集合
+
+  很多时候，我们会遇到成对出现的数据，例如，姓名和电话，身份证和人，IP和域名等等，这种成对出现，并且一一对应的数据关系，叫做映射。`java.util.Map<K, V>`接口，就是专门处理这种映射关系数据的集合类型。与Collection比较雪儿儿媳
+  Map集合是一种用于存储键值对（key-value）映射关系的集合类。它提供了一种快速查找和访问数据的方式，其中每个键都是唯一的，而值可以重复。
+
+### Map概述
+
+Collection接口为单列集合的根接口，Map接口为双列集合的根接口。
+
+Map集合与Collection集合，存储数据的形式不同：
+![Map数据储存形式](./Map数据储存形式.png)
+**Map集合特点：**
+
+* 存储元素时，必须以key-value（键值对）的方式进行
+* 键唯一性：Map集合中的键是唯一的，每个键只能对应一个值
+* 可重复值：Map集合中的值可以重复，不同的键可以关联相同的值
+* 高效的查找和访问：通过给定键key值（唯一），可以快速获取与之对应的value值
+* Map集合内部使用哈希表或红黑树等数据结构来实现高效的查找和访问
+
+### Map接口常用方法（注意泛型K代表Key，范型V代表Value）：
+
+```java
+    V   put(K key, V value)
+    //作用：把key-value存到当前Map集合中
+    //参数：key value
+    //返回值： V
+    //注意：当key相同时，会覆盖之前的value值
+    void   putAll(Map<? extends K,? extends V> m)
+    //作用：把指定map中的所有key-value，存到当前Map集合中
+    //参数：Map<? extends K,? extends V> m
+    //返回值：无
+    boolean  containsKey(Object key)
+    //作用：当前Map集合中是否包含指定的key值
+    //参数：
+    //返回值：
+    boolean  containsValue(Object value)
+    //作用：当前Map集合中是否包含指定的value值
+    //参数：
+    //返回值：
+    entrySet()
+    //介绍：是map的接口方法 HashMap实现的 
+    //作用：将集合中的每一组键值对封装成一个Entry类型的对象 存放在set对象中并返回
+    //参数：
+    //返回值：
+    void   clear()
+    //作用：清空当前Map集合中的所有数据
+    //参数：
+    //返回值：
+    V   get(Object key)
+    //作用：在当前Map集合中，通过指定的key值，获取对应的value
+    //参数：
+    //返回值：
+    V      size()
+    //作用：在当前Map集合中，移除指定key及其对应的value
+    //参数：
+    //返回值：
+    boolean   remove(Object key)
+    //作用：判断当前Map集合是否为空
+    //参数：
+    //返回值：
+    int      isEmpty()
+    //作用：返回当前Map集合中的元素个数（一对key-value，算一个元素数据）
+    //参数：
+    //返回值：
+    Set<K>   keySet()
+    //作用：返回Map集合中所有的key值
+    //参数：
+    //返回值：
+    Collection<V>   values()
+    //作用：返回Map集合中所有的value值
+    //参数：
+    //返回值：
+    Set<Map.Entry<K,V>>     entrySet()
+    //作用：把Map集合中的的key-value封装成Entry类型对象，再存放到set集合中，并返回
+    //参数：
+    //返回值：
+    boolean replace(K key, V newValue)
+    //作用：替换指定key对应的value值，如果key不存在，则添加
+    //参数：key newValue
+    //返回值：
+    boolean   replace(K key, V oldValue, V newValue)
+    //作用：替换指定key对应的value值，如果key不存在，则不替换
+    //参数：key oldValue newValue
+    //返回值：
+    interface Entry<K,V> 
+    //作用：Map集合的Entry类型，代表Map集合中的key-value
+    //参数：
+    //返回值：
+    
+```
+### Map遍历
+map 的 key值 是唯一的 所以可以考虑用其来遍历元素
+* 思路1°
+  1. 先获取key值   `keySet();`
+  2. `get(key);`
+  3. `for size()` \  `for-reach` 
+* 思路2°
+  1.  
+ 
+
+
+
+##### Map集合实现类：
+
+Java提供的Map集合实现类，常见的包括HashMap、TreeMap、LinkedHashMap等。它们在内部实现和性能方面有所不同，可以根据具体需求选择适合的实现类。
+
+![Map接口实现类](./Map接口实现类.png)
+
+* `HashMap`：
+  * 特点：底层借助哈希表实现，元素的存取顺序不能保证一致。由于要保证键的唯一、不重复，需要重写键所属类的 `hashCode()`方法、`equals()`方法(**重要，最常用**)
+* `Hashtable` ：和之前List集合中的 `Vector` 的功能类似，可以在多线程环境中，保证集合中的数据的操作安全 `（线程安全）`
+* `LinkedHashMap` ：该类是 `HashMap`的子类，存储数据采用的**哈希表结构+链表结构**。通过链表结构可以保证元素的存取顺序一致(**存入顺序就是取出顺序**)
+* `TreeMap` ：该类是 `Map` 接口的子接口 `SortedMap`下面的实现类，和 `TreeSet`类似，它可以对key值进行排序，同时构造器也可以接收一个比较器对象作为参数。支持key值的自然排序和比较器排序俩种方式(**支持key排序**)
+
+
+
+
+
+
+
+
+
+
+
+
+## 泛型
+### 介绍：
+**泛型（Generics）**是 Java 5 引入的新特性，是一个强大的特新。它允许在定义类、接口或方法中定义类型参数，这些类型参数在类实例化或方法被调用是会被具体的类型代替。使代码更加通用，提高代码的可读性和可维护性
