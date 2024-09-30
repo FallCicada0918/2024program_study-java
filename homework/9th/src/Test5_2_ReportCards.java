@@ -3,12 +3,15 @@
  * @Author: FallCicada
  * @Date: 2024-09-27 22:25:52
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-27 22:31:16
+ * @LastEditTime: 2024-09-29 19:44:48
  */
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
-
+/*
+ * 将学⽣按照成绩保存到集合中，并且名字叫tom的学⽣不管考多少分都位于班级的第⼀位。
+ * 代码结构：
+ */
 public class Test5_2_ReportCards {
     public static void main(String[] args) {
         // 定义Set集合并传入一个自定义比较规则的Comparator
@@ -64,6 +67,15 @@ class Student {
 }
 
 class StudentComparator implements Comparator<Student> {
+/**
+ * 比较两个学生对象的顺序
+ * 本方法主要用于排序学生，使得名字为"tom"的学生优先，其他学生则按照成绩降序排序
+ * 
+ * @param s1 第一个学生对象，用于比较
+ * @param s2 第二个学生对象，用于比较
+ * @return 如果s1的名字是"tom"，则s1优先，返回-1；如果s2的名字是"tom"，则s2优先，返回1；
+ *         否则，根据成绩降序排序，成绩高的学生优先
+ */
     @Override
     public int compare(Student s1, Student s2) {
         // 名字为 "tom" 的学生优先
