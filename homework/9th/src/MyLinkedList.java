@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-03 23:36:25
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-04 00:07:17
+ * @LastEditTime: 2024-10-04 00:23:31
  */
 public class MyLinkedList<T> {
     private Node<T> first; // 定义头节点
@@ -124,6 +124,6 @@ public class MyLinkedList<T> {
         linkedList.add(2, 1); // 在索引2处添加元素1
         linkedList.show(); // 展示链表
         linkedList.remove(2); // 删除索引2处的元素
-        linkedList.show(); // 展示链表
+        linkedList.show(); // 展示链表2
     }
 }
