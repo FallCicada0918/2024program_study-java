@@ -1,9 +1,9 @@
 /*
- * @Description: 该程序统计字符串中每个字符出现的次数
+ * @Description: 该程序统计字符串中每个字符出现的次数.
  * @Author: FallCicada
  * @Date: 2024-10-06 13:11:03
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-06 13:17:47
+ * @LastEditTime: 2024-10-08 08:32:04
  */
 
 import java.util.HashMap;
