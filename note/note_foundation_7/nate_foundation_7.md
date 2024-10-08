@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-08 17:29:46
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-08 17:36:20
+ * @LastEditTime: 2024-10-08 17:40:25
 -->
 # 2024年秋季Java基础课用笔记
 # 异常
@@ -51,3 +51,4 @@
 >
 >通过异常信息，我们可以定位异常发生的位置，以及异常发生的原因
 ### 异常体系
+`
