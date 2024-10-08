@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-09-26 08:35:31
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-09-30 10:23:15
+ * @LastEditTime: 2024-10-08 17:27:48
 -->
 
 # 2024年秋季Java基础课用笔记
@@ -944,19 +944,8 @@ Map集合与Collection集合，存储数据的形式不同：
     //作用：Map集合的Entry类型，代表Map集合中的key-value
     //参数：
     //返回值：
-    
+  
 ```
-### Map遍历
-map 的 key值 是唯一的 所以可以考虑用其来遍历元素
-* 思路1°
-  1. 先获取key值   `keySet();`
-  2. `get(key);`
-  3. `for size()` \  `for-reach` 
-* 思路2°
-  1.  
- 
-
-
 
 ##### Map集合实现类：
 
@@ -970,17 +959,188 @@ Java提供的Map集合实现类，常见的包括HashMap、TreeMap、LinkedHashM
 * `LinkedHashMap` ：该类是 `HashMap`的子类，存储数据采用的**哈希表结构+链表结构**。通过链表结构可以保证元素的存取顺序一致(**存入顺序就是取出顺序**)
 * `TreeMap` ：该类是 `Map` 接口的子接口 `SortedMap`下面的实现类，和 `TreeSet`类似，它可以对key值进行排序，同时构造器也可以接收一个比较器对象作为参数。支持key值的自然排序和比较器排序俩种方式(**支持key排序**)
 
+#### 基本方法使用案例：
+
+```java
+    import java.util.HashMap;
+    import java.util.Map;
+    import java.util.Map.Entry;
+    import java.util.Set;
+ 
+    public class Test081_MapBasic {
+    //双列集合 存放  id-name
+    public static void main(String[] args) {
+        //1.创建HashMap集合对象，并添加元素
+        Map<Integer,String> map = new HashMap<>();
+  
+        //注意，使用put方法添加键值对
+        map.put(1, "zs");
+        map.put(2, "ls");
+        map.put(4, "rose");
+        map.put(3, "jack");
+        map.put(2, "lucy"); //lucy 会把 ls覆盖掉
+  
+        //2.输出集合元素个数
+        //System.out.println(map);
+        System.out.println("size: "+map.size());
+  
+        //3.判断key和value是否存在
+        System.out.println("key 2: " + map.containsKey(2));
+        System.out.println("value ls: " + map.containsValue("ls"));
+        //4.根据key获取value
+        String name = map.get(3);
+        System.out.println("3: " + name);
+        //5.根据key删除键值对
+        map.remove(3);
+        System.out.println(map);
+    }
+}
+```
+
+运行结果：
+
+```
+    size: 4
+    key 2: true
+    value ls: false
+    3: jack
+    {1=zs, 2=lucy, 4=rose}
+```
+
+### Map遍历
+
+Map集合提供了2种遍历方式。
+
+#### 1)第一种遍历思路
+
+借助**Map中的keySet方法**，获取一个Set集合对象，内部包含了Map集合中所有的key，进而遍历Set集合获取每一个key值，再根据key获取对应的value。
+![Map遍历1](./Map遍历1.png)
+**keySet遍历案例：**
+
+```java
+    import java.util.HashMap;
+    import java.util.Map;
+    import java.util.Set;
+    public class Test082_Each {
+    //双列集合 存放  id-name
+        public static void main(String[] args) {
+            //1.创建HashMap集合对象，并添加元素
+            Map<Integer,String> map = new HashMap<>();
+            map.put(1, "zs");
+            map.put(2, "ls");
+            map.put(4, "rose");
+            map.put(3, "jack");
+            map.put(2, "lucy"); //lucy 会把 ls覆盖掉
+            //2.第一种遍历方法
+            //  先获取所有key,再根据key获取value
+            Set<Integer> set = map.keySet();
+            for (Integer k : set) {
+                //借助key获取对应的value值
+                String v = map.get(k);
+                System.out.println("id: " + k + " name: " + v);
+            }
+        }
+    }
+    //运行结果：
+    id: 1 name: zs
+    id: 2 name: lucy
+    id: 3 name: jack
+    id: 4 name: rose
+```
+
+#### 2)第二种遍历思路
+
+借助**Map中的entrySet方法**，获取一个Set对象，内部包含了Map集合中所有的键值对，然后对键值对进行拆分，得到key和value进行输出。
+
+`Map`接口源码分析
+
+```java
+    package java.util;
+ 
+    public interface Map<K,V> {
+    //省略...
+  
+    //获取map集合种所有的键值对
+    Set<Map.Entry<K, V>> entrySet();
+ 
+ 
+    //Map接口的内部接口，类似内部类
+    interface Entry<K,V> {
+        //Returns the key corresponding to this entry.
+        K getKey();
+   
+        //Returns the value corresponding to this entry.  
+        V getValue();
+   
+        //省略...
+    }
+  
+    //省略...
+ }
+```
+
+`Map`接口 `entrySet()`方法解析：将Map集合中的每一组key-value（键值对）都封装成一个 `Entry`类型对象，并且把这些个 `Entry`对象存放到Set集合中，并返回。
+
+entrySet遍历案例：
+
+对前面案例中的map集合对象进行遍历。
+
+```java
+    import java.util.HashMap;
+    import java.util.Map;
+    import java.util.Set;
+    import java.util.Map.Entry;
+    public class Test082_Each {
+        //双列集合 存放  id-name
+        public static void main(String[] args) {
+            //1.创建HashMap集合对象，并添加元素
+            Map<Integer,String> map = new HashMap<>();
+            map.put(1, "zs");
+            map.put(2, "ls");
+            map.put(4, "rose");
+            map.put(3, "jack");
+            map.put(2, "lucy"); //lucy 会把 ls覆盖掉
+            //2.第二种遍历
+            //  获取所有的key-value键值对，得到一个Set集合
+            Set<Entry<Integer,String>> entrySet = map.entrySet();
+            //  遍历Set集合
+            for (Entry<Integer, String> entry : entrySet) {
+                //  拆分键值对中的key和value
+                Integer key = entry.getKey();
+                String value = entry.getValue();
+                System.out.println("id: " + key + " name: " + value);
+            }
+        }
+    }
+    //运行结果：
+    id: 1 name: zs
+    id: 2 name: lucy
+    id: 3 name: jack
+    id: 4 name: rose
+```
+### HashMap
+
+### Hashtable
+
+### TreeMap
+
+### LinkedHashMap
+
+### Map小结
+
+| 集合类        | 特点                                                                           | 示例                                                |
+| ------------- | ------------------------------------------------------------------------------ | --------------------------------------------------- |
+| HashMap       | 基于哈希表实现，无序键值对集合，键和值均可为null。                             | Map<String,Intege> map = new HasMap<>();            |
+| TreeMap       | 基于红黑树实现，按键有序排序，键不可为null。                                   | Map <String,Integer> map = new TreeMap <>();        |
+| LinkedHashMap | 基于哈希表和双向链表实现，按插入顺序排序，键和值均可为null。                   | Map<String,  Integer> map = new  LinkedHashMap<>(); |
+| Hashtable     | 基于哈希表实现，键值对存储，线程安全，键无序且不允许重复，健和值都不能为null。 | Map<String, Integer> map = new Hashtable<>();       |
 
 
-
-
-
-
-
-
-
+## Collections
 
 
 ## 泛型
+
 ### 介绍：
+
 **泛型(Generics)** 是 Java 5 引入的新特性，是一个强大的特新。它允许在定义类、接口或方法中定义类型参数，这些类型参数在类实例化或方法被调用是会被具体的类型代替。使代码更加通用，提高代码的可读性和可维护性
