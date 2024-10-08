@@ -3,28 +3,44 @@
  * @Author: FallCicada
  * @Date: 2024-09-24 15:19:46
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-08 14:32:32
+ * @LastEditTime: 2024-10-08 15:31:47
  */
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-//代码有大bug
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
+
 
 enum Suit {
-    HEARTS, DIAMONDS, CLUBS, SPADES, JOKER
+    HEARTS("红心"), DIAMONDS("方片"), CLUBS("梅花"), SPADES("黑桃"), JOKER("JOKER");
+
+    private final String symbol;
+
+    Suit(String symbol) {
+        this.symbol = symbol;
+    }
+
+    @Override
+    public String toString() {
+        return this.symbol;
+    }
 }
 
 enum Rank {
-    TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE, SMALL_JOKER, BIG_JOKER
+    THREE("3"), FOUR("4"), FIVE("5"), SIX("6"), SEVEN("7"), EIGHT("8"), NINE("9"), TEN("10"),
+    JACK("J"), QUEEN("Q"), KING("K"), ACE("A"), TWO("2"), SMALL_JOKER("小王"), BIG_JOKER("大王");
+
+    private final String symbol;
+
+    Rank(String symbol) {
+        this.symbol = symbol;
+    }
+
+    @Override
+    public String toString() {
+        return this.symbol;
+    }
 }
 
 class Card {
@@ -39,9 +55,9 @@ class Card {
     @Override
     public String toString() {
         if (suit == Suit.JOKER) {
-            return rank == Rank.BIG_JOKER ? "Big Joker" : "Small Joker";
+            return rank.toString();
         }
-        return rank + " of " + suit;
+        return suit.toString() + rank.toString();
     }
 }
 
@@ -85,11 +101,14 @@ public class PokerGame {
     }
 
     private static void printPlayerCards(String player, List<Card> cards) {
-        System.out.println(player + "'s cards:");
-        for (Card card : cards) {
-            System.out.println(card);
+        System.out.print(player + ": [");
+        for (int i = 0; i < cards.size(); i++) {
+            System.out.print(cards.get(i));
+            if (i < cards.size() - 1) {
+                System.out.print(", ");
+            }
         }
-        System.out.println();
+        System.out.println("]");
     }
 
     public static void main(String[] args) {
@@ -108,9 +127,9 @@ public class PokerGame {
         sortCards(player3);
         sortCards(bottom);
 
-        printPlayerCards("Player 1", player1);
-        printPlayerCards("Player 2", player2);
-        printPlayerCards("Player 3", player3);
-        printPlayerCards("Bottom", bottom);
+        printPlayerCards("dipai", bottom);
+        printPlayerCards("player1", player1);
+        printPlayerCards("player2", player2);
+        printPlayerCards("player3", player3);
     }
 }
