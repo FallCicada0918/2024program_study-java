@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-08 14:48:32
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-08 15:08:59
+ * @LastEditTime: 2024-10-08 15:18:41
  */
 
 
@@ -56,6 +56,7 @@ public class Circle<X,Y,R> {
         ", Radius=" + radius +
         ']';
     }
+    
     public static void main(String[] args) {
         //实例化泛型对象
         Circle<Integer, Integer, Integer> circle = new Circle<>(1, 2, 3);
