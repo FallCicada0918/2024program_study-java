@@ -3,11 +3,10 @@
  * @Author: FallCicada
  * @Date: 2024-09-27 16:03:43
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-08 20:25:39
+ * @LastEditTime: 2024-10-09 10:36:45
  */
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 假设顺序列表ArrayList中存储的元素是整型数字1~5，遍历每个元素，将每个元素顺序输出。（你能想到的所有⽅式）
