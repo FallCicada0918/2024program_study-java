@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-08 09:45:53
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-08 09:57:43
+ * @LastEditTime: 2024-10-09 15:35:08
  */
 
 import java.util.Arrays;
@@ -48,7 +48,7 @@ public class Test11 {
         System.out.println("double 类型最大值: " + maxDouble);
 
         // 示例：使用 String 类型的 List
-        List<String> strings = Arrays.asList("apple", "banana", "cherry");
+        List<String> strings = Arrays.asList("1", "10", "2");
         String maxString = Test11.max(strings);
         System.out.println(strings);
         System.out.println("string 类型最大值: " + maxString);

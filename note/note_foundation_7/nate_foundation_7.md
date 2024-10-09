@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-08 17:29:46
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-08 19:33:34
+ * @LastEditTime: 2024-10-09 17:07:00
 -->
 # 2024年秋季Java基础课用笔记
 # 异常
@@ -65,7 +65,7 @@
 * 运行时异常
 #### 编译时异常
 * 继承自`Exception` 类，也称为checked exception
-* 编译器在编译期间，会主动检查这种异常，如果发现异常则必须显示处理，否则程序就会发生错误，无法通过编译
+* 编译器在编译期间，会主动检查这种异常，如果发现异常则必须显示处理，否则程序就会发生错误，无法通过编译,无法生成字节码文件
 #### 运行时异常
 * `RuntimeException` 类及其子类，也称为unchecked exception
 * 编译器在编译期间，不会检查这种异常，也不要求我们去处理，但是在运行期间，如果出现这种异常则自动抛出
@@ -113,3 +113,90 @@
 ## 异常抛出
 ### 自动抛出
 Java代码中，出现了提前指定好的异常情况的时候，代码会自动创建异常对象，并且将该异常对象抛出。
+
+例如，上述案例中执行 `int a = 1/0;` 的时候，代码会自动创建并抛出 `ArithmeticException` 类型的异常对象，来表示当前的这种异常情况。（算术异常）
+
+又如，代码中执行`String str = null; str.toString();` 的时候，代码会自动创建并抛出 `NullPointerException` 类型的异常对象，来表示当前这种异常情况。（空指针异常）
+
+### 手动抛出
+以上描述的异常情况，都是JVM中提前规定好的，我们不需要干预，JVM内部自己就会创建并抛出异常对象。
+
+但是在其他的一些情况下，我们也可以手动的创建并抛出异常对象，抛出后系统也会按照默认的方式去处理。
+
+#### **手动抛出异常固定格式：**
+
+`throw 异常对象;`
+
+#### 案例展示：
+从键盘录入用户名和密码，如果不是"root"和"briup"，则主动抛出异常RuntimeException。
+```java
+    import java.util.Scanner;
+    //手动抛出异常对象
+    public class Test02_Throw {
+        public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("please input username and password: ");
+        String username = sc.nextLine();
+        String password = sc.nextLine();
+            login(username,password);
+        }
+        public static void login(String name, String passwd) {
+            if("root".equals(name) && "briup".equals(passwd)) {
+                System.out.println("登录成功!");
+            }else {
+                //抛出运行时异常
+                throw new RuntimeException("用户名或密码录入有误")String username = sc.nextLine();
+                String password = sc.nextLine();
+                login(username,password);
+        }
+        public static void login(String name, String passwd) {
+            if("root".equals(name) && "briup".equals(passwd)) {
+                System.out.println("登录成功!");
+            }else {
+                //抛出运行时异常
+                throw new RuntimeException("用户名或密码录入有误");
+            }
+        }
+    }
+```
+运行结果：
+![手动抛出异常](./案例2运行结果.png)
+注意，此时方法中抛出的是一个运行时异常，编译器不会做出检查，所以代码可以正常的编译运行，但是运行的时候，如果用户名密码匹配失败，则抛出异常。
+
+如果抛出的是编译时异常，则编译器会检查，代码无法通过编译，具体如下：
+![手动抛出异常](./手动抛出异常.png)
+
+如果要解决上述编译问题，需要程序员修改代码，有2种方式解决：
+* 声明当前方法不对该异常处理，继续抛出异常，给上一级处理
+* 主动捕获异常并处理
+具体内容下一章节讲解。
+
+# 异常处理
+代码中出现了异常，除了默认的处理方式外，我们还可以手动处理异常:
+* 声明继续抛出异常，借助throws关键字实现
+* 捕获并处理异常，借助try、catch、finally关键字实现
+  
+## thorws
+throws关键字用于在方法声明中指定该方法可能抛出的异常类型。
+
+这个声明的目的，就是告诉方法的调用者，你调用我的这个方法的时候要小心啦，方法在运行的时候**可能**会抛出指定类型的异常。
+
+#### 定义格式
+```java
+    [修饰符] 返回值类型 方法名(形参列表) throws 异常类名1,异常类名2... {
+        方法体语句;
+    }
+```
+
+#### 案例展示：
+使用throws关键字解决上述案例中编译报错的问题。
+![手动抛出异常](./thorws.png)
+分析上述代码可知，login方法中虽然存在编译时异常，但程序员借助throws关键字告诉编译器，login方法中如果出现Exception异常则主动抛出，传递给上一级，所以login方法可以通过编译。
+
+>main方法中第13行之所以编译出错，是因为第13行可能会出现编译时异常，程序员必须主动处理该异常才可以：要么继续throws抛出，要么主动捕获处理（后续课程讲解）。
+
+main方法借助throws声明抛出Exception解决异常：
+![main方法借助throws声明抛出Exception解决异常](./main方法借助throws声明抛出Exception解决异常.png)
+**运行结果：**
+![手动抛出异常](./手动抛出异常运行结果.png)
+
