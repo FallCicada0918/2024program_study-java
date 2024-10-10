@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-08 17:29:46
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-10 10:15:12
+ * @LastEditTime: 2024-10-10 10:44:25
 -->
 
 # 2024年秋季Java基础课用笔记
@@ -105,15 +105,15 @@
             test1();
             System.out.println("world");
         }
-      
+  
         public static void test1(){
             test2();
         }
-      
+  
         public static void test2(){
             test3();
         }
-      
+  
         public static void test3(){
             //下面代码会抛出异常
             int a = 1/0;
@@ -233,67 +233,81 @@ main方法借助throws声明抛出Exception解决异常：
 ![main方法借助throws声明抛出Exception解决异常](./main方法借助throws声明抛出Exception解决异常.png)
 **运行结果：**
 ![手动抛出异常](./手动抛出异常运行结果.png)
+
 #### 常见面试题：throw和throws关键字区别
+
 `throw` 关键字：
+
 * `throw` 关键字用于手动抛出一个异常对象。它通常用在方法体内，用于在程序的任意位置抛出一个异常
 * 使用throw 关键字，可以将异常对象抛出到方法的调用者，然后由调用者处理该异常
 * throw 关键字后面必须跟一个异常对象，该对象可以是Java内置的异常类，也可以是自定义的异常类的实例
 
 `throws` 关键字：
+
 * `throws` 关键字用于在方法签名中声明可能抛出的异常。它通常用于方法定义的位置，用于指示该方法有可能抛出指定的异常
 * 使用throws 关键字，可以将异常的处理责任交给方法的调用者，即告诉调用者该方法可能会抛出指定的异常，调用者需要进行相应的异常处理。
 * throws 关键字后面跟的是一个异常类或多个异常类，使用逗号分隔
->简而言之，`throw` 关键字用于手动抛出异常，而`throws`关键字用于声明方法可能抛出的异常。
+
+> 简而言之，`throw` 关键字用于手动抛出异常，而 `throws`关键字用于声明方法可能抛出的异常。
 >
->`throw`关键字将异常抛给方法的调用者，而`throws`关键字将异常的处理责任交给方法的调用者。
+> `throw`关键字将异常抛给方法的调用者，而 `throws`关键字将异常的处理责任交给方法的调用者。
+
 ### 异常方法
+
 `Exception`中并没有定义方法，它的方法都是从Throwable 中继承过来的，器中常用的方式有：
+
 * `printStackTrace()` ，打印输出当前发送异常的详细信息（重要）
 * `getMessage()` ，返回异常对象被抛出的时候，所携带的信息，一般是异常的发生原因（重要)
 * `printStackTrace(PrintWriter s)`，方法重载，可以指定字符输出流，对异常信息进行输出
 * `printStackTrace(PrintStream s)`，方法重载，可以指定字节输出流，对异常信息进行输出
-  
+
 下一个知识点，异常捕获中，我们就会用到这几个方法。
 
 ### try...catch
+
 `try-catch` 语句块，就是用来对指定代码，进行异常捕获处理，并且处理完成后，JVM不会停止运行，代码还可以正常的往下运行！
 
 #### **捕获异常语法：**
+
 ```java
     try {
         可能会出现异常的代码;
     }catch(异常类型 引用名) {
         //处理异常的代码，可以是简单的输出异常信息
         //也可以使用日志进行了记录，也可以对数据进行修改纠正等操作
-        
+    
         //一般输出异常信息
         //e.printStackTrace();
     }
 ```
+
 > try：该代码块中包含可能产生异常的代码
-> 
->catch：用来进行某种类型异常的捕获，并对捕获到的异常进行处理
+>
+> catch：用来进行某种类型异常的捕获，并对捕获到的异常进行处理
 
 #### **执行流程：**
+
 * 程序从 try 里面的代码开始执行
 * 出现异常，就会跳转到对应的 `catch`块 里面去执行
 * 执行完毕之后，程序出 `catch`块，继续往下执行
-  
+
 #### 案例展示：
+
 准备一个数组，从键盘录入1个索引值，输出数组在该位置上的值。
+
 ```java
     import java.util.Scanner;
  
     public class Test033_Catch {
         public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
-    
+  
             int[] arr = {3,1,0,4,6,5};
-            
+        
             try {
                 System.out.println("input index: ");
                 int index = sc.nextInt();
-                
+            
                 int num = arr[index];
                 System.out.println("arr["+index+"]: " + num);
             }catch(IndexOutOfBoundsException e) {
@@ -303,29 +317,35 @@ main方法借助throws声明抛出Exception解决异常：
                 //System.out.println(e.getMessage());
                 //System.out.println(e.toString());
             }
-            
+        
             System.out.println("after try-catch ...");
         }
     }
 ```
+
 运行正常效果：
 ![正确运行效果](./正确运行效果.png)
 
 运行异常效果：
 ![异常运行效果](./异常运行效果.png)
 观察上述输出可知，捕获异常成功，成功执行catch块中代码。
->注意：try-catch语句处理过异常后，代码会继续往下执行，所以输出了"after try-catch ..."
+
+> 注意：try-catch语句处理过异常后，代码会继续往下执行，所以输出了"after try-catch ..."
 
 上述案例中，键盘录入的如果不是整形数，而是字符串、字符或浮点数，运行效果如下：
 ![异常运行效果](./异常运行效果2.png)
 未能捕获到对应的异常
->原因：try-catch语句只能捕获到自己定义的异常，不能捕获到其他异常，比如：`NumberFormatException`。
+
+> 原因：try-catch语句只能捕获到自己定义的异常，不能捕获到其他异常，比如：`NumberFormatException`。
 
 ![异常运行效果](./运行效果3异常原因.png)
+
 ### 捕获多种异常
+
 如果try语句块中的代码可能抛出多种异常，并且是不同类型的，则可以写多个catch语句块，用来同时捕获多种类型异常。
 
 #### **格式1：**
+
 ```java
     try {
     可能会出现异常的代码;
@@ -339,9 +359,11 @@ main方法借助throws声明抛出Exception解决异常：
         //异常处理代码
     }
 ```
+
 案例展示：
 
-上述案例优化，使可以捕获`java.util.InputMismatchException`异常。
+上述案例优化，使可以捕获 `java.util.InputMismatchException`异常。
+
 ```java
     import java.util.InputMismatchException;
     import java.util.Scanner;
@@ -349,13 +371,13 @@ main方法借助throws声明抛出Exception解决异常：
     public class Test034_Catchs {
         public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
-    
+  
             int[] arr = {3,1,0,4,6,5};
-            
+        
             try {
                 System.out.println("input index: ");
                 int index = sc.nextInt();
-                
+            
                 int num = arr[index];
                 System.out.println("arr["+index+"]: " + num);
             }catch(IndexOutOfBoundsException e) {
@@ -365,25 +387,30 @@ main方法借助throws声明抛出Exception解决异常：
                 System.out.println("in catch, 捕获键盘录入格式有误异常成功...");
                 e.printStackTrace();
             }
-            
+        
             System.out.println("after try-catch ...");
         }
     }
 ```
+
 运行效果1：成功捕获数组越界异常
 ![运行效果1](./运行效果1.png)
 运行效果2：成功捕获输入不匹配异常
 ![运行效果2](./运行效果2.png)
 注意事项：
->这种异常处理方式，要求多个catch中的异常不能相同
+
+> 这种异常处理方式，要求多个catch中的异常不能相同
 >
->如果catch中的多个异常类之间有子父类关系的话，那么子类异常必须写在父类异常上面的catch块中，父类异常必须写在下面的catch块中。
+> 如果catch中的多个异常类之间有子父类关系的话，那么子类异常必须写在父类异常上面的catch块中，父类异常必须写在下面的catch块中。
 >
->因为如果父类型异常再最上面的话，下面catch语句代码，永远不会被执行。
+> 因为如果父类型异常再最上面的话，下面catch语句代码，永远不会被执行。
 
 ![运行效果3](./注意事项.png)
+
 #### **格式2：**
+
 相对格式1，书写更加紧凑
+
 ```java
     try {
         可能会出现异常的代码;
@@ -391,8 +418,11 @@ main方法借助throws声明抛出Exception解决异常：
         //处理异常的代码，可以是简单的输出异常信息
     }  
 ```
+
 #### 案例展示：
+
 使用格式2对上述案例进行改造。
+
 ```java
     import java.util.InputMismatchException;
     import java.util.Scanner;
@@ -417,21 +447,25 @@ main方法借助throws声明抛出Exception解决异常：
         }
     }
 ```
+
 运行效果如上，略...
+
 #### **结论**
->实际开发中，异常的处理不会过于复杂，一般catch块中捕获Exception即可。因为Exception是最大的异常类型，由于多态的原因，Exception类型的引用e，可以捕获接收到任意类型的异常对象。
+
+> 实际开发中，异常的处理不会过于复杂，一般catch块中捕获Exception即可。因为Exception是最大的异常类型，由于多态的原因，Exception类型的引用e，可以捕获接收到任意类型的异常对象。
 
 案例展示:
+
 ```java
     public class Test034_Catchs {
         public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
             int[] arr = {3,1,0,4,6,5};
-            
+        
             try {
                 System.out.println("input index: ");
                 int index = sc.nextInt();
-                
+            
                 int num = arr[index];
                 System.out.println("arr["+index+"]: " + num);
             }catch(Exception e) {
@@ -441,10 +475,13 @@ main方法借助throws声明抛出Exception解决异常：
         }
     }
 ```
+
 ### finally语句
-`finally` 关键字可以和`try、catch`关键字一起使用，固定搭配为：`try - catch - finally` ，它可以保证指定`finally`中的代码一定会执行，无论是否发生异常！
+
+`finally` 关键字可以和 `try、catch`关键字一起使用，固定搭配为：`try - catch - finally` ，它可以保证指定 `finally`中的代码一定会执行，无论是否发生异常！
 
 固定格式：
+
 ```
      try {
         可能出现异常的代码
@@ -454,22 +491,24 @@ main方法借助throws声明抛出Exception解决异常：
         离开try或catch块前，必须要执行的代码
     }
 ```
+
 `finally` 块的主要作用：
 
-资源释放：在`try` 块中打开的资源（例如文件、数据库连接、网络连接等）可以在`finally `块中关闭或释放，以确保资源的正确释放，即使在发生异常的情况下也能够执行释放操作。
+资源释放：在 `try` 块中打开的资源（例如文件、数据库连接、网络连接等）可以在 `finally `块中关闭或释放，以确保资源的正确释放，即使在发生异常的情况下也能够执行释放操作。
 
 清理操作：`finally` 块可以用于执行一些清理操作，例如关闭打开的流、释放锁、取消注册监听器等。
 
-异常处理的补充：`finally`块可以用于在`try`块和`catch`块之后执行一些必要的操作，例如记录日志、发送通知等。
+异常处理的补充：`finally`块可以用于在 `try`块和 `catch`块之后执行一些必要的操作，例如记录日志、发送通知等。
 
 示例代码：
 
 运行下面程序，观察产生异常时、不产生异常时，finally代码块执行效果。
+
 ```java
     public class Test035_Finally {
         public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
-            
+        
             try {
                 System.out.println("请录入两个整数：");
                 int a = sc.nextInt();
@@ -483,24 +522,26 @@ main方法借助throws声明抛出Exception解决异常：
                 //无论try块中是否发生异常，finally块中的代码都会被执行
                 System.out.println("in finally 代码块 ...");
             }
-            
+        
             System.out.println("after try-catch-finally ...");
         }
     }
 ```
+
 正常运行:
 ![运行正常](./正常运行.png)
 异常执行：
-![异常执行](./异常执行.png) 
+![异常执行](./异常执行.png)
 
 #### 常见面试题：
 
 观察下面代码，说明第7行输出的r为什么？
+
 ```java
     public class Test036_Question {
         public static void main(String[] args) {
             int r = getNum(10,0);
-            
+        
             System.out.println("r: " + r);
         }
         public static int getNum(int a, int b) {
@@ -513,18 +554,19 @@ main方法借助throws声明抛出Exception解决异常：
                 //先建立返回通道，放入 n当前的值 20，在最终返回前，再去调用finally
                 return n;
             }finally {
-                //System.out.println("in finally, n: " + n);        
-    //20            
+                //System.out.println("in finally, n: " + n);    
+    //20        
                 n = 30;
                 //System.out.println("in finally,最后 n: " + n);
-    //30            
+    //30        
             }
             return n
         }
-          
+      
     }
-    
+  
 ```
+
 #### 答:
 
 这段 Java 代码中有一个 `getNum` 方法，该方法尝试将两个整数相除，并处理可能发生的除以零异常。在第7行，实际上看到的是 `main` 方法中输出的结果 `r`。要理解为什么 `r` 是某个特定值，需要分析 `getNum` 方法的行为。
@@ -538,7 +580,9 @@ main方法借助throws声明抛出Exception解决异常：
 综上所述，第7行输出的 `r` 应该是 `20`。
 
 ### 基础概念理解
+
 示例:
+
 ```java
     package chapter06;
     public class Java02_Exception {
@@ -583,39 +627,42 @@ main方法借助throws声明抛出Exception解决异常：
 
     }
 ```
+
 ## 作業
+
 ### 1°
+
 ```java
 public class ReturnExceptionDemo  {
-    public static void methodA() throws
-        Exception {
+    public static void methodA() throws Exception {
         try {
-        System.out.println("进入方法A");
-        throw new Exception("制造异常");
+            System.out.println("进入方法A");
+            throw new Exception("制造异常");
         } finally {
-        System.out.println("用A方法的finally");
+            System.out.println("用A方法的finally");
         }
     }
-        public static int methodB() {
+    public static int methodB() {
         try {
-        System.out.println("进入方法B");
-        return 1;
+            System.out.println("进入方法B");
+            return 1;
         } finally {
-        System.out.println("用B方法的finally");
-        return 2;
+            System.out.println("用B方法的finally");
+            return 2;
         }
-        }
-        public static void main(String[] args) {
+    }
+    public static void main(String[] args) {
         try {
-        methodA();
+            methodA();
         } catch (Exception e) {
-        System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
-        int i = methodB();
-        System.out.println(i);
+            int i = methodB();
+            System.out.println(i);
     }
 }
 ```
+
 这段 Java 代码包含两个方法：`methodA` 和 `methodB`，以及 `main` 方法来调用它们。
 
 #### methodA
@@ -684,14 +731,16 @@ public static void main(String[] args) {
 用B方法的finally
 2
 ```
+
 ### 2°
+
 ```java
 public class Return1 {
     public static void main(String[] args) {
         int i = new Return1().testReturn1();
         System.out.println(i);
     }
-        
+    
     private int testReturn1() {
         int i = 1;
         try {
@@ -706,6 +755,7 @@ public class Return1 {
     }
 }
 ```
+
 这段 Java 代码定义了一个名为 `Return1` 的类，其中包含一个 `main` 方法和一个 `testReturn1` 方法。
 
 #### main 方法
@@ -768,6 +818,7 @@ finally:3
 - 最终返回并打印的 `i` 的值是 `2`，而不是 `finally` 块中修改后的 `3`。
 
 ### 3°
+
 ```java
 import java.util.ArrayList;
 import java.util.List;
@@ -775,20 +826,20 @@ public class Return2 {
     public static void main(String[] args) {
         System.out.println(testTest03());
         }
-        private static List<Integer>
-        testTest03() {
-        List<Integer> list = new ArrayList<>();
+        private static List<Integer> testTest03() {
+            List<Integer> list = new ArrayList<>();
         try {
-        list.add(1);
-        System.out.println("try:" +list);
-        return list;
+            list.add(1);
+            System.out.println("try:" +list);
+            return list;
         } finally {
-        list.add(3);
-        System.out.println("finally:" +list);
+            list.add(3);
+            System.out.println("finally:" +list);
         }
     }
 }
 ```
+
 这段 Java 代码创建了一个名为 `Return2` 的类，其中包含一个 `main` 方法用于启动程序，以及一个静态方法 `testTest03` 用于测试返回一个 `List<Integer>`。
 
 让我们逐步分析这段代码：
@@ -844,13 +895,15 @@ finally:[1, 3]
 ```
 
 具体步骤如下：
+
 1. `try` 块执行后，输出 `"try:[1]"`。
 2. `finally` 块执行后，输出 `"finally:[1, 3]"`。
 3. `main` 方法中打印 `testTest03()` 的返回值，即 `[1, 3]`。
 
-这个顺序表明了 `finally` 块在 `return` 语句执行之前会被调用，并且任何对 `list` 的修改都会保留下来。
+这个顺序表明了 `finally` 块在 `return` 语句执行之后被调用，但是list是引用型变量,数据存储在堆中,return时list为[1],但是在方法运行结束后return时,他引用的地址所指引的堆内存已经变成了[1,3],所以最终返回的是[1,2].
 
 ### 4°
+
 ```java
 public class Return3 {
     public static void main(String[] args) {
@@ -869,6 +922,7 @@ public class Return3 {
     }
 }
 ```
+
 这段 Java 代码定义了一个名为 `Return3` 的类，其中包含一个 `main` 方法用于启动程序，以及一个静态方法 `testTest04` 用于处理字符串并返回结果。
 
 让我们逐步分析这段代码：
@@ -926,16 +980,20 @@ hello!
 ```
 
 具体步骤如下：
+
 1. `try` 块执行后，输出 `"try:hello!"`。
 2. `finally` 块执行后，输出 `"finally:hello!world"`。
 3. `main` 方法中打印 `testTest04()` 的返回值，即 `"hello!"`。
 
 这表明虽然在 `finally` 块中改变了 `a` 的值，但是 `return` 语句已经决定了返回的字符串值为 `"hello!"`。
+
 ## 自定义异常
-* 果要自定义一个编译时异常类型，就自定义一个类，并继承`Exception`
-* 如果要自定义一个运行时异常类型，就自定义一个类，并继承`RuntimeException`
+
+* 果要自定义一个编译时异常类型，就自定义一个类，并继承 `Exception`
+* 如果要自定义一个运行时异常类型，就自定义一个类，并继承 `RuntimeException`
 
 定义步骤：
+
 1. 定义异常类
 2. 写继承关系
 3. 提供空参构造
