@@ -146,7 +146,7 @@ public class StringDemo {
 以上实例编译运行结果如下：
 
 ```
-1、菜鸟教程网址：www.runoob.com
+
 
 ```
 
