@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-10 11:06:30
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-11 09:23:10
+ * @LastEditTime: 2024-10-11 10:02:24
  * @: 無限進步
 -->
 
@@ -337,3 +337,38 @@ Java中通过继承Thread类来创建并启动一个新的线程的步骤如下�
 ```
 
 ## main线程
+使用`Java`命令来运行一个类的时候，首先会启动JVM（进程），JVM会创建一个名字叫做`main` 的线程，来执行类中的程序入口（main方法）
+
+### 案例
+```java
+    public static void main(String[] args) {
+        //获取执行当前方法的线程对象
+        Thread currentThread = Thread.currentThread();
+        System.out.println("执行当前方法的线程名字为："+currentThread.getName());
+    }
+    //运行结果：
+    执行当前方法的线程名字为：main
+```
+>所以，我们写在main方法中的代码，其实都是由名字叫做main的线程去执行的
+
+上面代码使用`java` 命令运行的过程是：
+![main线程](./命令执行过程.png)
+1. 使用java命令运行Test类，会先启动JVM
+2. 应用类加载器通过CLASSPATH环境变量配置的路径，找到Test.class文件，并加载到方法区。
+
+    注意：这里会同时生产一个Class类型对象，来代表这个Test类型，并且会优先处理类中的静态代码（静态属性、静态方法、静态代码块）
+3. JVM创建并启动一个名字叫做main的线程
+4. main线程将Test中的main方法加载到栈区中
+5. 在栈里面，main线程就可以一行行的执行方法中的代码了
+6. 如果在执行代码中，遇到了方法调用，那么线程会继续把被调用的方法，加载到栈中（压栈操作），然后执行栈顶这个最新添加进来的方法，**栈顶**方法执行完，就释放（出栈操作），然后在进行执行当前最新的栈顶方法（之前我们画过栈里面的方法调用图，例如在异常的学习过程中）
+
+7. 代码执行过程输出执行结果
+8. 当前是单线程程序，main线程结束了，JVM就停止了
+9.  如果是多线程程序，那么JVM要等所有线程都结束了才会停止
+
+Runnable
+Runnable接口是线程的第二种实现方式，它比Thread接口更灵活，因为Runnable接口没有start方法，所以Runnable接口不能直接启动线程，需要借助Thread类来完成。
+
+第二种创建线程对象的方式：**借助`Runnable`接口的实现类完成**。
+
+`java.lang.Runnable`，该接口中只有一个抽象方法`run`
