@@ -1,28 +1,21 @@
 /*
- * @Description: 
+ * @Description: 实现Runable接口
  * @Author: FallCicada
- * @Date: 2024-10-10 15:22:56
- * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-10 15:26:28
- * @: 無限進步
+ * @Date: 2024-10-10 15:21:19
+ * @LastEditors: rendc
+ * @LastEditTime: 2024-10-10 15:34:55
  */
 /**
- * IMyRunable
+ * IMyRunable- 创建一个Runable的实现类
  */
 public class IMyRunnable implements Runnable {
-    @Override
-    public void run() {
-        String name = Thread.currentThread().getName();
-        for(int i = 0; i<10;i++){
-            System.out.println("运行："+name + "run");
-            try{
-                Thread.sleep(1000);//让当前执行代码睡眠1000毫秒
-            }catch(InterruptedException e){
-                
-                //为什么异常,没有抛出
-                e.printStackTrace();
-            }
-        
-        }   
-    }  
+  // 重写run方法
+  @Override
+  public void run() {
+    // 线程要处理的内容
+    String name = Thread.currentThread().getName();
+    for (int i = 0; i < 10; i++) {
+      System.out.println(name + ":" + i);
+    }
+  }
 }
