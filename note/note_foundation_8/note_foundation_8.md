@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-10 11:06:30
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-11 09:17:31
+ * @LastEditTime: 2024-10-11 09:23:10
  * @: 無限進步
 -->
 
@@ -102,6 +102,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>淡绿背景示例</title>
+ 
     <style>
         .light-green-background {
             background-color: #ccffcc; /* 设置背景颜色为淡绿色 */
@@ -142,7 +143,8 @@
 | ------------ | ------------------------------------------- |
 | void run()   | 在线程开启后，此方法将被调用执行            |
 | void start() | 使此线程开始执行，Java虚拟机会调用run方法() |
- Java中通过继承Thread类来创建并启动一个新的线程的步骤如下：
+ 
+Java中通过继承Thread类来创建并启动一个新的线程的步骤如下：
  
 * 定义`Thread` 类的子类，重写`run()` 方法，`run()` 方法中的代码就是线程的执行任务
 * 创建`Thread` 子类对象（可以是匿名内部类对象），这个对象就代表一个要独立运行的新线程
