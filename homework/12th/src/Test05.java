@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-11 16:46:39
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-11 17:18:22
+ * @LastEditTime: 2024-10-12 08:43:04
  * @: 無限進步
  */
 /**
@@ -11,11 +11,13 @@
  * 2.	定义子线程2，线程处理函数中输出 A-Z，每隔10ms输出一次
  * 3.	要求，当线程1输出30之后，线程2插队进来优先输出，全部输出后，线程1再输出31-50。
  */
-class SubThread1 extends Thread {
+class Thread1 extends Thread {
     private final Object lock; // 定义一个锁对象
+    private final Thread2 thread2; // 定义子线程2
 
-    public SubThread1(Object lock) {
+    public Thread1(Object lock) {
         this.lock = lock; // 构造函数，初始化锁对象
+        this.thread2 = new Thread2(lock); // 初始化子线程2
     }
 
     @Override
@@ -23,6 +25,7 @@ class SubThread1 extends Thread {
         for (int i = 1; i <= 50; i++) { // 循环输出1到50
             synchronized (lock) { // 同步锁，确保线程安全
                 if (i == 31) { // 当输出到30时
+                    thread2.start(); // 启动子线程2
                     try {
                         lock.wait(); // 线程等待，释放锁
                     } catch (InterruptedException e) {
@@ -40,10 +43,10 @@ class SubThread1 extends Thread {
     }
 }
 
-class SubThread2 extends Thread {
+class Thread2 extends Thread {
     private final Object lock; // 定义一个锁对象
 
-    public SubThread2(Object lock) {
+    public Thread2(Object lock) {
         this.lock = lock; // 构造函数，初始化锁对象
     }
 
@@ -66,15 +69,8 @@ class SubThread2 extends Thread {
 public class Test05 {
     public static void main(String[] args) {
         Object lock = new Object(); // 创建一个锁对象
-        SubThread1 thread1 = new SubThread1(lock); // 创建子线程1
-        SubThread2 thread2 = new SubThread2(lock); // 创建子线程2
+        Thread1 thread1 = new Thread1(lock); // 创建子线程1
 
         thread1.start(); // 启动子线程1
-        try {
-            Thread.sleep(5 * 30); // 确保子线程1输出1-30后再启动子线程2
-        } catch (InterruptedException e) {
-            e.printStackTrace(); // 捕获并打印异常
-        }
-        thread2.start(); // 启动子线程2
     }
 }
