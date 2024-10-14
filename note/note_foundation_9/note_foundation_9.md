@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-12 09:53:57
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-12 14:47:16
+ * @LastEditTime: 2024-10-14 08:44:39
  * @: 無限進步
 -->
 # File类、IO流
@@ -13,6 +13,12 @@
 ### 概述
 
 `java.io.File` 类是文件和目录路径名的抽象表示，主要用于文件和目录的创建、查找和删除等操作。
+
+* input I 输入
+* output O 输出
+* streams 流
+    * 字节流
+    * 字符流
 
 #### 构造方法
 1. `File(String pathname)`：根据一个路径名创建一个File对象。
@@ -68,7 +74,61 @@
         }
     }
 ```
+>小贴士
 >
->1. 一个File对象代表硬盘中实际存在的一个文件或者目录。
->2. 无论该路径下是否存在文件或者目录，都不影响File对象的创建。
+>   1. 一个File对象代表硬盘中实际存在的一个文件或者目录。
+>   2. 无论该路径下是否存在文件或者目录，都不影响File对象的创建。
 
+### 使用
+#### 路径获取
+```java
+    //File绝对路径名字符串
+    public String getAbsolutePath();
+    //File文件构造路径
+    public String getPath();
+    //File文件或目录的名称
+    public String getName();
+    //File文件或目录的长度
+    public long length();
+```
+
+#### 代码案例
+```java
+    import java.io.File;
+ 
+public class Test012_File {
+    public static void main(String[] args) {
+        //针对文件
+        File f = new File("D:/aaa/Test1101_File.java");
+        //返回此File的绝对路径名字符串
+        System.out.println("文件绝对路径:" + f.getAbsolutePath());
+        //将此File转换为路径名字符串
+        System.out.println("文件构造路径:" + f.getPath());
+        //返回由此File表示的文件或目录的名称
+         System.out.println("文件名称:" + f.getName());
+        //返回由此File表示的文件的长度
+        System.out.println("文件长度:" + f.length() + "字节");
+        //针对目录
+        File f2 = new File("D:/aaa");
+        System.out.println("目录绝对路径:" + 
+        f2.getAbsolutePath());
+        System.out.println("目录构造路径:" + f2.getPath());
+        System.out.println("目录名称:" + f2.getName());
+        System.out.println("目录长度:" + f2.length());
+    }
+}
+        //输出结果
+        文件绝对路径:D:\aaa\Test1101_File.java
+        文件构造路径:D:\aaa\Test1101_File.java
+        文件名称:Test1101_File.java
+        文件长度:650字节
+        目录绝对路径:D:\aaa
+        目录构造路径:D:\aaa
+        目录名称:aaa
+        目录长度:0
+```
+> API中说明：length()，表示文件的长度。但是File对象表示目录，则返回值未指定。
+
+2）路径操作
+* 绝对路径：从盘符开始的路径，这是一个完整的路径。
+* 相对路径：相对于项目目录的路径，这是一个便捷的路径，开发中经常使用 
