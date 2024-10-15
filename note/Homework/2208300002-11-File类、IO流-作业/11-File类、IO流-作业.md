@@ -936,8 +936,168 @@ FallCicada
   注意拷贝效率，注意新文件中不要出现多余的空行。
 
 ### 答：
+#### 代码：
 ```java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
+/**
+ * ClassWork04
+ */
+public class ClassWork04 {
+
+    public static void main(String[] args) {
+        String inputFilePath = "D:\\test\\File_GBK.txt";
+        String outputFilePath = "D:\\test\\File_UTF8.txt";
+
+        try (
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFilePath), "GBK"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFilePath), "UTF-8"))
+        ) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
+#### 运行结果
+```
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>cd D:\test
+
+(pytorch) D:\test>dir
+ Volume in drive D is Data
+ Volume Serial Number is 0E06-9E63
+
+ Directory of D:\test
+
+2024/10/15  18:25    <DIR>          .
+2024/10/15  16:33                26 converted_source.txt
+2024/10/15  18:26                18 File_GBK.txt
+2024/10/15  16:29                16 source.txt
+               3 File(s)             60 bytes
+               1 Dir(s)  204,977,233,920 bytes free
+
+(pytorch) D:\test>cd D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>javac -d ../out ClassWork04.java                                      
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>java -cp ../out/ ClassWork04    
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>cd D:\test
+
+(pytorch) D:\test>dir
+ Volume in drive D is Data
+ Volume Serial Number is 0E06-9E63
+
+ Directory of D:\test
+
+2024/10/15  18:28    <DIR>          .
+2024/10/15  16:33                26 converted_source.txt
+2024/10/15  18:26                18 File_GBK.txt
+2024/10/15  18:28                29 File_UTF8.txt
+2024/10/15  16:29                16 source.txt
+               4 File(s)             89 bytes
+               1 Dir(s)  204,977,229,824 bytes free
+```
+##### 文件内容_GBK
+![classWork04_GBK](./classWork04_GBK.png)
+#### 文件内容_UTF8
+![classWork04_UTF8](./classWork04_UTF8.png)
 ## 作业5：
   将多个学生对象存放到集合中，然后执行序列化和反序列化操作
+### 答：
+#### 代码：
+```java
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+/**
+ * ClassWork05
+ */
+public class ClassWork05 {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("Alice", 20));
+        students.add(new Student("Bob", 22));
+        students.add(new Student("Charlie", 21));
+        students.add(new Student("David", 23));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:\\WorkSpace\\FallCicada_WorkSpace\\FallCicada_JAVA\\homework\\13th\\src\\dir\\Student.txt"));
+        //写入文件        
+        for(Object student:students){
+            oos.writeObject(student);
+        }
+        //读出文件
+        // 序列化对象
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\WorkSpace\\FallCicada_WorkSpace\\FallCicada_JAVA\\homework\\13th\\src\\dir\\Student.txt"));
+        for(int i = 0; i < students.size(); i++){
+            Student student = (Student) ois.readObject();
+            System.out.println(student);
+        }
+        // // 创建对象
+        // Student student = (Student) ois.readObject();
+        // // 序列化
+        // System.out.println("对象反序列化成功" + student);
+        // 关闭流
+        ois.close();
+        //释放资源
+        oos.close();
+    }
+}
+```
+
+#### 运行结果
+```
+
+ Directory of D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src\dir
+
+2024/10/15  19:52    <DIR>          .
+2024/10/15  18:35    <DIR>          ..
+2024/10/15  17:30                10 b.txt
+               1 File(s)             10 bytes
+               2 Dir(s)  203,170,885,632 bytes free
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src\dir>cd .. 
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>javac -d ../out ClassWork05.java
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>java -cp ../out/ ClassWork05     
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Student [name=Alice, age=0]
+Student [name=Bob, age=0]
+Student [name=Charlie, age=0]
+Student [name=David, age=0]
+
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>cd dir 
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src\dir>dir
+ Volume in drive D is Data
+ Volume Serial Number is 0E06-9E63
+
+ Directory of D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src\dir
+
+2024/10/15  19:52    <DIR>          .
+2024/10/15  18:35    <DIR>          ..
+2024/10/15  17:30                10 b.txt
+2024/10/15  19:52               128 Student.txt
+               2 File(s)            138 bytes
+               2 Dir(s)  203,170,885,632 bytes free
+```
