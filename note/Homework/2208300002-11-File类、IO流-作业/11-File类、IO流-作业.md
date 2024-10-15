@@ -702,3 +702,242 @@ Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
 ![源文件](./源文件.png)
 ##### 转码文件
 ![转码文件](./转码后.png)
+
+# 课堂作业
+## 作业1：将a.txt的内容，拷贝到b.txt中
+### 答：
+#### 代码
+```java
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+/**
+ * TestSing
+ */
+public class ClassWork01 {
+
+    public static void main(String[] args) {
+        // 路径名、目录（文件夹）,读取文件
+        try{
+            FileInputStream inputPath = new FileInputStream("D:\\WorkSpace\\FallCicada_WorkSpace\\FallCicada_JAVA\\homework\\13th\\file\\a.txt");
+            FileOutputStream outputPath = new FileOutputStream("D:\\WorkSpace\\FallCicada_WorkSpace\\FallCicada_JAVA\\homework\\13th\\file\\b.txt");
+            int r;
+            while ((r = inputPath.read()) != -1) {
+                outputPath.write(r);
+                
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("执行完成");
+    }
+}
+
+```
+#### 运行结果：
+```
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file>cd D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file>dir
+ Volume in drive D is Data
+ Volume Serial Number is 0E06-9E63
+
+ Directory of D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file
+
+2024/10/15  16:54    <DIR>          .
+2024/10/15  16:54    <DIR>          ..
+2024/10/14  15:52               491 a.txt
+               1 File(s)            491 bytes
+               2 Dir(s)  204,977,483,776 bytes free
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file>cd D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>javac -d ../out ClassWork01.java    .md
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>java -cp ../out/ ClassWork01    
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+执行完成
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>cd D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file>dir
+ Volume in drive D is Data
+ Volume Serial Number is 0E06-9E63
+
+ Directory of D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file
+
+2024/10/15  17:00    <DIR>          .
+2024/10/15  16:54    <DIR>          ..
+2024/10/14  15:52               491 a.txt
+2024/10/15  17:00               491 b.txt
+               2 File(s)            982 bytes
+               2 Dir(s)  204,977,483,776 bytes free
+```
+
+
+## 作业2：使用write(bytes, 0, 3)这个方法完成第1题
+### 代码：
+```java
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+/**
+ * TestSing
+ */
+public class ClassWork02 {
+
+    public static void main(String[] args) {
+        // 路径名、目录（文件夹）,读取文件
+        try {
+            FileInputStream inputPath = new FileInputStream("D:\\WorkSpace\\FallCicada_WorkSpace\\FallCicada_JAVA\\homework\\13th\\file\\a.txt");
+            FileOutputStream outputPath = new FileOutputStream("D:\\WorkSpace\\FallCicada_WorkSpace\\FallCicada_JAVA\\homework\\13th\\file\\a_copy.txt");
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputPath.read(buffer)) != -1) {
+                outputPath.write(buffer, 0, bytesRead);
+            }
+            inputPath.close();
+            outputPath.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("执行完成");
+    }
+}
+
+```
+#### 运行结果
+```
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file>dir
+ Volume in drive D is Data
+ Volume Serial Number is 0E06-9E63
+
+ Directory of D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file
+
+2024/10/15  17:00    <DIR>          .
+2024/10/15  16:54    <DIR>          ..
+2024/10/14  15:52               491 a.txt
+2024/10/15  17:00               491 b.txt
+               2 File(s)            982 bytes
+               2 Dir(s)  204,977,475,584 bytes free
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file>cd D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>javac -d ../out ClassWork02.java 
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>java -cp ../out/ ClassWork02    
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+执行完成
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>cd D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file>dir                                                                    
+ Volume in drive D is Data
+ Volume Serial Number is 0E06-9E63
+
+ Directory of D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\file
+
+2024/10/15  17:10    <DIR>          .
+2024/10/15  16:54    <DIR>          ..
+2024/10/14  15:52               491 a.txt
+2024/10/15  17:10               491 a_copy.txt
+2024/10/15  17:00               491 b.txt
+               3 File(s)          1,473 bytes
+               2 Dir(s)  204,977,471,488 bytes free
+```
+
+## 作业3：
+  1. 从键盘录入1行字符串，将其转换为byte[]
+  2. 由byte[]构建一个内存输入流对象
+  3. 从内存输入流中用小数组方式读取数据，并写入到 src\dir\b.txt 文件中
+  4. 关闭流、释放资源
+### 答：
+#### 代码：
+```java
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Scanner;
+/**
+ * ClassWork03
+ */
+public class ClassWork03 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入一行字符串：");
+        String input = scanner.nextLine();
+        scanner.close();
+
+        byte[] byteArray = input.getBytes();
+
+        try {
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
+            FileOutputStream fileOutputStream = new FileOutputStream("D:\\WorkSpace\\FallCicada_WorkSpace\\FallCicada_JAVA\\homework\\13th\\src\\dir\\b.txt");
+             
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = byteArrayInputStream.read(buffer)) != -1) {
+                fileOutputStream.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+#### 运行结果：
+```
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src\dir>dir
+ Volume in drive D is Data
+ Volume Serial Number is 0E06-9E63
+
+ Directory of D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src\dir
+
+2024/10/15  17:19    <DIR>          .
+2024/10/15  17:16    <DIR>          ..
+               0 File(s)              0 bytes
+               2 Dir(s)  204,977,442,816 bytes free
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src\dir>cd ..
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>javac -d ../out ClassWork03.java 
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>java -cp ../out/ ClassWork03    
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+请输入一行字符串：
+FallCicada
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src>cd dir
+
+(pytorch) D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src\dir> dir   
+ Volume in drive D is Data
+ Volume Serial Number is 0E06-9E63
+
+ Directory of D:\WorkSpace\FallCicada_WorkSpace\FallCicada_JAVA\homework\13th\src\dir
+
+2024/10/15  17:20    <DIR>          .
+2024/10/15  17:16    <DIR>          ..
+2024/10/15  17:20                10 b.txt
+               1 File(s)             10 bytes
+               2 Dir(s)  204,977,442,816 bytes free
+```
+#### 文件内容
+![课堂作业3](./课堂作业3.png)
+
+## 作业4：
+  按照GBK编码读取 D:\\test\\File_GBK.txt 文件内容，然后写入UTF-8编码文件 D:\\test\\File_UTF8.txt 。
+  注意拷贝效率，注意新文件中不要出现多余的空行。
+
+### 答：
+```java
+
+```
+## 作业5：
+  将多个学生对象存放到集合中，然后执行序列化和反序列化操作
