@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-16 20:12:11
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-16 20:13:45
+ * @LastEditTime: 2024-10-16 20:24:01
  * @: 無限進步
  */
 package Test04;
@@ -35,11 +35,12 @@ public class Test04_Server {
                     String inputLine;
                     while ((inputLine = in.readLine()) != null) {
                         // 3.1 输出读取内容
-                        System.out.println("收到客户端消息: " + inputLine);
+                        System.out.println("read: " + inputLine);
 
                         // 如果收到quit则跳出循环，结束当前子线程
                         if ("quit".equalsIgnoreCase(inputLine)) {
                             System.out.println("客户端请求断开连接");
+                            System.exit(0);
                             break;
                         }
 

@@ -1,9 +1,17 @@
 /*
  * @Description: 
  * @Author: FallCicada
+ * @Date: 2024-10-16 20:25:31
+ * @LastEditors: FallCicada
+ * @LastEditTime: 2024-10-16 20:25:45
+ * @: 無限進步
+ */
+/*
+ * @Description: 
+ * @Author: FallCicada
  * @Date: 2024-10-16 20:14:22
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-16 20:35:32
+ * @LastEditTime: 2024-10-16 20:20:50
  * @: 無限進步
  */
 
@@ -16,7 +24,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Test04_Client {
+public class Test04_Client2 {
     public static void main(String[] args) {
         try {
             // 1.搭建TCP客户端
