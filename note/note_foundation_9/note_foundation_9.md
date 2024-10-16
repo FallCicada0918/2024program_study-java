@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-12 09:53:57
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-15 14:59:05
+ * @LastEditTime: 2024-10-16 10:23:56
  * @: 無限進步
 -->
 # File类、IO流
@@ -14,62 +14,6 @@
 
 `java.io.File` 类是文件和目录路径名的抽象表示，主要用于文件和目录的创建、查找和删除等操作。
 
-* input  I 输入     文件、内存或网络 流向程序
-* output O 输出     程序流向 文件、内存或者网络  
-* streams 流 形容的是数据在设备与设备之间流动传输
-    * 字节流    以字节（byte）为单位
-    * 字符流    以字符（char）为单位
-* 分类
-  * 字节输入流  InputStream
-  * 字节输出流  OutputStream
-  * 字符输入流  Reader
-  * 字符输出流  Writer
-* 分类
-  * 字节流
-        字节输入流  InputStream 是所有字节输入流的抽象父类
-        字节输出流  OutputStream是所有字节输出流的抽象父类
-        一般在操作数据时，往往是使用一对，一个负责读取数据，一个负责写数据，都是使用这两个父类的子类对象。
-        一切的数据文件（文本、图片、音频、视频），在计算机中，都是以二进制数字的形式保存，都是一个个的字节，所以在传输数据时，字节流可以传输任意类型数据
-        明确无论使用什么流，最终底层都是二进制数据
-* IO流按照功能活粉的分类
-  * 节点流（原始流）
-        节点流（Node Streams）是最基本的 IO 流，直接与数据源或目标进行交互，但
-缺乏一些高级功能。
-    * `FileInputStream` 和 `FileOutputStream`(字节流)：用于读取和写入文件的字节流。
-    * `FileReader` 和 `FileWriter`(字符流)：用于读取和写入文件的字符流
-    * `ByteArrayInputStream` 和 `ByteArrayOutputStream`(字节数组流)：用于读取和写入字节数组的流
-    * `CharArrayReader` 和 `CharArrayWriter`(字符数组流)：用于读取和写入字符数组的流（省略，与ByteArray字节流类似，可自学）
-  * 增强流（包装流）：
-    * 其在节点流的基础上提供了额外的功能和操作
-    * 增强流提供了更高级的操作和便利性，使得 IO 操作更加方便、高效和灵活
-    * 增强流通过装饰器模式包装节点流，可以在节点流上添加缓冲、字符编码转换、对象序列化等功能
-  * 缓冲流
-    在 Java 的 I/O 流中，缓冲思想是一种常见的优化技术，用于提高读取和写入数据的效率。它通过在内存中引入缓冲区（Buffer）来减少实际的 I/O 操作次数，从而提高数据传输的效率。
-    
-    缓冲思想的基本原理是将数据暂时存储在内存中的缓冲区中，然后按照一定的块大小进行读取或写入操作。相比于直接对磁盘或网络进行读写操作，使用缓冲区可以减少频繁的 I/O 操作，从而提高效率。
-* 方法：
-      read()
-        返回值 int 
-        参数 空 
-        用处： 每次读取1个字节 当读到文件末尾返回-1
-      read(bytes)
-        返回值 int 
-        参数 bytes数组 
-        用处： 第一次就将读到的字节存入数组中，返回值是读取到的字节数
-        如果多次读取，最后一次读取到文件末尾返回-1
-      read(bytes, 3, 5);
-        读取字节流，输出的结果向后偏移3个字节[0,0,0,97,98,99,]
-        读取5个字节 如果读取成功 则返回实际长度
-        如果返回-1 读取到文件的末尾
-    创建FileOutputStream的时候，如果文件不存在，会自动创建，但是路径中的目录不存在，会抛出异常（FileNotFoundException）
-    方法：
-      write(bytes, 0, 3);
-    文件追加  
-      FileOutputStream(path,true);
-    内存输出流
-      使用内存流可以操作内存中字节数组中的数据，所以内存字节流也叫字节数组流
-      ByteArrayOutputStream
-      ByteArrayInputStream
 
 #### 构造方法
 1. `File(String pathname)`：根据一个路径名创建一个File对象。
@@ -183,12 +127,183 @@ public class Test012_File {
 2）路径操作
 * 绝对路径：从盘符开始的路径，这是一个完整的路径。
 * 相对路径：相对于项目目录的路径，这是一个便捷的路径，开发中经常使用 
+#### 案例描述
+```
+案例描述：输入具体文件路径，以及只输入文件名字，通过File的绝对路径方法，验证结果
+```
 
+代码案例：
 
+```java
+import java.io.File;
+ 
+public class Test013_File {
+    public static void main(String[] args) {
+        // D盘下的Test1101_File.java文件
+        File f = new File("D:\\Test1101_File.java");
+        System.out.println(f.getAbsolutePath());
+        
+        // 项目下的Test1101_File.java文件（不包含包名）
+        File f2 = new File("Test1101_File.java");
+        System.out.println(f2.getAbsolutePath());
+    }
+ }
+ 
+//输出结果：
+D:\Test1101_File.java
+ E:\work\2023-CoreJava\Test1101_File.java
+```
 
+#### 判断操作
+```java
+//判断文件或目录是否存在
+public boolean exists();
+ //判断是否是文件
+public boolean isFile();
+ //判断是否是目录
+public boolean isDirectory();
+```
 
+#### 代码案例
+```java
+    import java.io.File;
+    public class Test014_File {
+        public static void main(String[] args) {
+            File f = new File("D:\\aaa\\bbb.java");
+            File f2 = new File("D:\\aaa");
+            // 判断是否存在
+            System.out.println("D:\\aaa\\bbb.java 是否存在:"+f.exists());
+            System.out.println("D:\\aaa 是否存在:"+f2.exists());
+            // 判断是文件还是目录
+            System.out.println("D:\\aaa 文件?:"+f2.isFile());
+            System.out.println("D:\\aaa 目录?:"+f2.isDirectory());
+        }
+    }
+    //输出结果：
+    D:\aaa\bbb.java 是否存在:true
+    D:\aaa 是否存在:true
+    D:\aaa 文件?:false
+    D:\aaa 目录?:true
+```
+####  创建删除操作
+```java
+//当且仅当具有该名称的文件尚不存在时，创建一个新的空文件
+public boolean createNewFile();
+ //创建目录
+public boolean mkdir();
+ //创建多级目录
+public boolean mkdirs();
+ //文件或目录的删除
+public boolean delete();
+```
+#### 代码案例
+```java
+import java.io.File;
+ import java.io.IOException;
+ 
+public class Test015_File {
+    public static void main(String[] args) {
+        try {
+            // 文件的创建
+            File f = new File("aaa.txt");
+            System.out.println("是否存在:" + f.exists()); // false
+            //当且仅当具有该名称的文件尚不存在时，创建一个新的空文件
+            System.out.println("是否创建:" + f.createNewFile()); // true
+            System.out.println("是否存在:" + f.exists()); // true
+ 
+            // 目录的创建(创建由此File表示的目录)
+            File f2 = new File("newDir");
+            System.out.println("是否存在:" + f2.exists());// false
+            System.out.println("是否创建:" + f2.mkdir()); // true
+            System.out.println("是否存在:" + f2.exists());// true
+ 
+            // 创建多级目录(创建由此File表示的目录，包括任何必需但不存在的父目录)
+            File f3 = new File("newDira\\newDirb");
+            System.out.println(f3.mkdir());// false
+            File f4 = new File("newDira\\newDirb");
+            System.out.println(f4.mkdirs());// true
+             // 文件的删除
+            System.out.println(f.delete());// true
+            // 目录的删除
+            System.out.println(f2.delete());// true
+            System.out.println(f4.delete());// false
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+}
+```
+> API中说明：delete方法，如果此File表示目录，则目录必须为空才能删除。
+#### 目录遍历操作
+```java
+public class Fileimplements Serializable, Comparable<File>{
+    //省略...
+    //目录文件调用该方法，获取目录中所有子文件名，返回String数组
+    //其他文件调用该方法，返回null
+    public String[] list();
+    //目录文件调用该方法，获取目录中所有子文件，返回File数组
+    //其他文件调用该方法，返回null
+    public File[] listFiles();
+    //目录文件调用该方法，获取目录中符合筛选条件的子文件，返回File数组
+    //其他文件调用该方法，返回null
+    public File[] listFiles(FileFilter filter);
+    // 省略
+}
+```
+#### 案例展示
+准备目录`D:\test `，放入各类文件，编码对其遍历
 
+![案例操作目录](./案例操作目录.png)
+```java
+    public class Test016_File {
+        public static void main(String[] args) {
+            //1.准备目录文件
+            String dirPath = "D:\\test";
+            File dirFile = new File(dirPath);
+            //2.获取目录中所有子文件名称，并遍历输出
+            String[] list = dirFile.list();
+            for (String s : list) {
+                System.out.println(s);
+            }
+            System.out.println("---------------");
+            //3.准备普通文件
+            String fileName = "readme.pdf";
+            File file = new File(dirFile,fileName);
+            //4.普通文件调用list返回null
+            String[] list2 = file.list();
+            System.out.println(list2);
+            System.out.println("---------------");
+            //5.获取目录中所有子文件对象，并遍历输出
+            File[] listFiles = dirFile.listFiles();
+            for (File f : listFiles) {
+                System.out.println(f);
+            }
+            System.out.println("---------------");
+            //6.使用文件过滤器，获取目录下所有普通文件，并遍历输出
+            File[] listFiles2 = dirFile.listFiles(new FileFilter(){
+                @Override
+                public boolean accept(File f) {
+                    if(f.isFile())
+                        return true;
+                    return false;
+                }
+            });
+            for (File f : listFiles2) {
+                //输出文件名即可
+                System.out.println(f.getName());
+            }
+        }
+    }
+```
+#### 输出结果：
+![输出结果](./File类操作输出结果.png)
 
+## IO流
+
+### 流的概念
+
+>在计算机中，流是个抽象的概念，是对输入输出设备的抽象。在Java程序中，对于数据的输入/输出操作，都是以"流"的方式进行
 
 
 
@@ -295,3 +410,62 @@ Java 提供了一种对象序列化的机制，可以将对象和字节序列之
 * `java.io.ObjectInputStream`(反序列化)
  
     从内存、文件、网络等地方读取出对象的字节序列，并生成对应的对象
+```
+
+* input  I 输入     文件、内存或网络 流向程序
+* output O 输出     程序流向 文件、内存或者网络  
+* streams 流 形容的是数据在设备与设备之间流动传输
+    * 字节流    以字节（byte）为单位
+    * 字符流    以字符（char）为单位
+* 分类
+  * 字节输入流  InputStream
+  * 字节输出流  OutputStream
+  * 字符输入流  Reader
+  * 字符输出流  Writer
+* 分类
+  * 字节流
+        字节输入流  InputStream 是所有字节输入流的抽象父类
+        字节输出流  OutputStream是所有字节输出流的抽象父类
+        一般在操作数据时，往往是使用一对，一个负责读取数据，一个负责写数据，都是使用这两个父类的子类对象。
+        一切的数据文件（文本、图片、音频、视频），在计算机中，都是以二进制数字的形式保存，都是一个个的字节，所以在传输数据时，字节流可以传输任意类型数据
+        明确无论使用什么流，最终底层都是二进制数据
+* IO流按照功能活粉的分类
+  * 节点流（原始流）
+        节点流（Node Streams）是最基本的 IO 流，直接与数据源或目标进行交互，但
+缺乏一些高级功能。
+    * `FileInputStream` 和 `FileOutputStream`(字节流)：用于读取和写入文件的字节流。
+    * `FileReader` 和 `FileWriter`(字符流)：用于读取和写入文件的字符流
+    * `ByteArrayInputStream` 和 `ByteArrayOutputStream`(字节数组流)：用于读取和写入字节数组的流
+    * `CharArrayReader` 和 `CharArrayWriter`(字符数组流)：用于读取和写入字符数组的流（省略，与ByteArray字节流类似，可自学）
+  * 增强流（包装流）：
+    * 其在节点流的基础上提供了额外的功能和操作
+    * 增强流提供了更高级的操作和便利性，使得 IO 操作更加方便、高效和灵活
+    * 增强流通过装饰器模式包装节点流，可以在节点流上添加缓冲、字符编码转换、对象序列化等功能
+  * 缓冲流
+    在 Java 的 I/O 流中，缓冲思想是一种常见的优化技术，用于提高读取和写入数据的效率。它通过在内存中引入缓冲区（Buffer）来减少实际的 I/O 操作次数，从而提高数据传输的效率。
+    
+    缓冲思想的基本原理是将数据暂时存储在内存中的缓冲区中，然后按照一定的块大小进行读取或写入操作。相比于直接对磁盘或网络进行读写操作，使用缓冲区可以减少频繁的 I/O 操作，从而提高效率。
+* 方法：
+      read()
+        返回值 int 
+        参数 空 
+        用处： 每次读取1个字节 当读到文件末尾返回-1
+      read(bytes)
+        返回值 int 
+        参数 bytes数组 
+        用处： 第一次就将读到的字节存入数组中，返回值是读取到的字节数
+        如果多次读取，最后一次读取到文件末尾返回-1
+      read(bytes, 3, 5);
+        读取字节流，输出的结果向后偏移3个字节[0,0,0,97,98,99,]
+        读取5个字节 如果读取成功 则返回实际长度
+        如果返回-1 读取到文件的末尾
+    创建FileOutputStream的时候，如果文件不存在，会自动创建，但是路径中的目录不存在，会抛出异常（FileNotFoundException）
+    方法：
+      write(bytes, 0, 3);
+    文件追加  
+      FileOutputStream(path,true);
+    内存输出流
+      使用内存流可以操作内存中字节数组中的数据，所以内存字节流也叫字节数组流
+      ByteArrayOutputStream
+      ByteArrayInputStream
+```
