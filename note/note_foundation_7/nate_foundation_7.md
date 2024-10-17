@@ -275,7 +275,7 @@ main方法借助throws声明抛出Exception解决异常：
     }catch(异常类型 引用名) {
         //处理异常的代码，可以是简单的输出异常信息
         //也可以使用日志进行了记录，也可以对数据进行修改纠正等操作
-    
+  
         //一般输出异常信息
         //e.printStackTrace();
     }
@@ -303,11 +303,11 @@ main方法借助throws声明抛出Exception解决异常：
             Scanner sc = new Scanner(System.in);
   
             int[] arr = {3,1,0,4,6,5};
-        
+      
             try {
                 System.out.println("input index: ");
                 int index = sc.nextInt();
-            
+          
                 int num = arr[index];
                 System.out.println("arr["+index+"]: " + num);
             }catch(IndexOutOfBoundsException e) {
@@ -317,7 +317,7 @@ main方法借助throws声明抛出Exception解决异常：
                 //System.out.println(e.getMessage());
                 //System.out.println(e.toString());
             }
-        
+      
             System.out.println("after try-catch ...");
         }
     }
@@ -373,11 +373,11 @@ main方法借助throws声明抛出Exception解决异常：
             Scanner sc = new Scanner(System.in);
   
             int[] arr = {3,1,0,4,6,5};
-        
+      
             try {
                 System.out.println("input index: ");
                 int index = sc.nextInt();
-            
+          
                 int num = arr[index];
                 System.out.println("arr["+index+"]: " + num);
             }catch(IndexOutOfBoundsException e) {
@@ -387,7 +387,7 @@ main方法借助throws声明抛出Exception解决异常：
                 System.out.println("in catch, 捕获键盘录入格式有误异常成功...");
                 e.printStackTrace();
             }
-        
+      
             System.out.println("after try-catch ...");
         }
     }
@@ -461,11 +461,11 @@ main方法借助throws声明抛出Exception解决异常：
         public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
             int[] arr = {3,1,0,4,6,5};
-        
+      
             try {
                 System.out.println("input index: ");
                 int index = sc.nextInt();
-            
+          
                 int num = arr[index];
                 System.out.println("arr["+index+"]: " + num);
             }catch(Exception e) {
@@ -508,7 +508,7 @@ main方法借助throws声明抛出Exception解决异常：
     public class Test035_Finally {
         public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
-        
+      
             try {
                 System.out.println("请录入两个整数：");
                 int a = sc.nextInt();
@@ -522,7 +522,7 @@ main方法借助throws声明抛出Exception解决异常：
                 //无论try块中是否发生异常，finally块中的代码都会被执行
                 System.out.println("in finally 代码块 ...");
             }
-        
+      
             System.out.println("after try-catch-finally ...");
         }
     }
@@ -541,7 +541,7 @@ main方法借助throws声明抛出Exception解决异常：
     public class Test036_Question {
         public static void main(String[] args) {
             int r = getNum(10,0);
-        
+      
             System.out.println("r: " + r);
         }
         public static int getNum(int a, int b) {
@@ -554,15 +554,15 @@ main方法借助throws声明抛出Exception解决异常：
                 //先建立返回通道，放入 n当前的值 20，在最终返回前，再去调用finally
                 return n;
             }finally {
-                //System.out.println("in finally, n: " + n);    
-    //20        
+                //System.out.println("in finally, n: " + n);  
+    //20      
                 n = 30;
                 //System.out.println("in finally,最后 n: " + n);
-    //30        
+    //30      
             }
             return n
         }
-      
+    
     }
   
 ```
@@ -740,7 +740,7 @@ public class Return1 {
         int i = new Return1().testReturn1();
         System.out.println(i);
     }
-    
+  
     private int testReturn1() {
         int i = 1;
         try {
@@ -988,7 +988,9 @@ hello!
 这表明虽然在 `finally` 块中改变了 `a` 的值，但是 `return` 语句已经决定了返回的字符串值为 `"hello!"`。
 
 ## 自定义异常
+
 ### 应用场景
+
 JavaAPI中已经存在的异常类，都是当年sun公司，提前定义好的，它们分别表示着某一种已知的异常情况。
 
 但是，在我们开发的系统中，大多数业务功能里面总会出现一些新的异常情况，而这些异常情况，当年sun公司定义异常类型的时候，肯定是想不到的.
@@ -998,6 +1000,7 @@ JavaAPI中已经存在的异常类，都是当年sun公司，提前定义好的�
 所以，在实际开发中，我们会自定义一些异常的类型，用来表示上面描述的那些异常情况，这样做的好处就是，我们通过观察系统的运行日志，就可以很快的知道当前系统是发生了什么事情，才导致出了这些异常情况
 
 ### 自定义异常
+
 * 如果要自定义一个编译时异常类型，就自定义一个类，并继承 `Exception`
 * 如果要自定义一个运行时异常类型，就自定义一个类，并继承 `RuntimeException`
 
@@ -1009,10 +1012,11 @@ JavaAPI中已经存在的异常类，都是当年sun公司，提前定义好的�
 4. 提供带参构造
 
 例如，自定义编译时异常类型，通过名字可知，这是在用户登录期间发生异常时，应该创建并抛出的异常类型
+
 ```java
     public class LoginExceptin extends Exception{
         public LoginExceptin() {
-        
+      
         }
         public LoginExceptin(String message) {
             super(message);
@@ -1021,7 +1025,9 @@ JavaAPI中已经存在的异常类，都是当年sun公司，提前定义好的�
 ```
 
 #### 代码案例：
-准备一个Student学生类，包含数据成员age，其取值范围为[4,79]，如果setAge时参数取值不在该范围中，则抛出自定义运行时异常类型`AgeOutRangeException` 对象。
+
+准备一个Student学生类，包含数据成员age，其取值范围为[4,79]，如果setAge时参数取值不在该范围中，则抛出自定义运行时异常类型 `AgeOutRangeException` 对象。
+
 ```java
     class Student {
         private String name;
@@ -1046,7 +1052,7 @@ JavaAPI中已经存在的异常类，都是当年sun公司，提前定义好的�
             } 
             this.age = age;
         }
-    
+  
         @Override
         public String toString() {
             return "Student [name=" + name + ", age=" + age + "]";
@@ -1056,19 +1062,19 @@ JavaAPI中已经存在的异常类，都是当年sun公司，提前定义好的�
     //自定义异常，属于运行时异常，年龄不在有效范围异常
     class AgeOutRangeException extends RuntimeException {
         public AgeOutRangeException() {}
-        
+      
         public AgeOutRangeException(String message) {
             super(message);
         }
     }
-    
+  
     public class Test04_AgeException {
         public static void main(String[] args) {
             Student s1 = new Student();
             s1.setName("zs");
             s1.setAge(21);
             System.out.println(s1);
-            
+          
             System.out.println("--------------");
             Student s2 = new Student();
             try {
@@ -1081,14 +1087,15 @@ JavaAPI中已经存在的异常类，都是当年sun公司，提前定义好的�
         }
     }
 ```
+
 运行效果：
 ![](./案例3运行结果.png)
 
 ## 断言
 
-断言（`assert`），是JDK1.4的时候，增加的一个关键字。用它可以在程序中，确认一些关键性条件必须是成立的，否则会抛出`AssertionError` 类型的错误。（**了解即可**）
+断言（`assert`），是JDK1.4的时候，增加的一个关键字。用它可以在程序中，确认一些关键性条件必须是成立的，否则会抛出 `AssertionError` 类型的错误。（**了解即可**）
 
-注意，断言（`assert` ）并不是用来代替`if` 判断的，而是确认系统中的一些**关键性条件是必须成立**的，所以`assert` 和`if` 并不冲突，并且还可以通过给JVM传参数，来控制断言（`assert` ）是否生效。
+注意，断言（`assert` ）并不是用来代替 `if` 判断的，而是确认系统中的一些**关键性条件是必须成立**的，所以 `assert` 和 `if` 并不冲突，并且还可以通过给JVM传参数，来控制断言（`assert` ）是否生效。
 
 断言（assert）的使用方式：
 
@@ -1098,27 +1105,29 @@ JavaAPI中已经存在的异常类，都是当年sun公司，提前定义好的�
     assert 布尔表达式 : "错误信息";
 ```
 
->当布尔表达式为true时，断言通过，否则抛出AssertionError类型错误
+> 当布尔表达式为true时，断言通过，否则抛出AssertionError类型错误
 >
->所以，assert后面的布尔表达式必须true才行。（也就是说条件必须成立）
+> 所以，assert后面的布尔表达式必须true才行。（也就是说条件必须成立）
 
 案例展示：
+
 ```java
     public class Test05_Assert {
         public static void main(String[] args) {
             test(0);
         }
-        
+      
         public static void test(int a) {
             assert a!=0 : "参数a的值不能为0";
-            
+          
             int b = 10;
             int c = b/a;
-            
+          
             System.out.println(c);  
         }
     }
 ```
+
 运行效果：
 ![断言运行结果](./断言运行结果.png)
 发现断言没有生效
@@ -1133,5 +1142,5 @@ JavaAPI中已经存在的异常类，都是当年sun公司，提前定义好的�
 此时的运行结果为：因为断言要求参数a不能为0，但实际参数传的为0
 
 ![](./image.png)
->如果去掉-ea参数的话，那么断言（assert）语句，在JVM执行代码的时候，会被直接忽略的
 
+> 如果去掉-ea参数的话，那么断言（assert）语句，在JVM执行代码的时候，会被直接忽略的

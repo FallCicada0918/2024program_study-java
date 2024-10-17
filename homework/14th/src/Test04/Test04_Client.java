@@ -3,7 +3,7 @@
  * @Author: FallCicada
  * @Date: 2024-10-16 20:14:22
  * @LastEditors: FallCicada
- * @LastEditTime: 2024-10-16 20:35:32
+ * @LastEditTime: 2024-10-17 08:27:30
  * @: 無限進步
  */
 
@@ -39,12 +39,11 @@ public class Test04_Client {
                 if ("quit".equalsIgnoreCase(userInput)) {
                     break;
                 }
-                
+                //宋勇到此一游
                 // 3.3 读取服务器返回信息并显式
                 String serverResponse = in.readLine();
                 System.out.println("服务器: " + serverResponse);
             }
-            
             // 4.关闭资源
             in.close();
             out.close();
